@@ -1,12 +1,12 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import { ProgramsList } from "../containers/programs";
+import { Profile } from "../containers/profile/Profile";
 import { titleHeader } from "../styles";
 
 const Stack = createStackNavigator();
 
-export const ProgramsStack = () => (
+export const ProfileStack = () => (
   <Stack.Navigator screenOptions={titleHeader}>
-    <Stack.Screen name="ProgramsList" component={ProgramsList} options={{ title: "Programas" }} />
+    <Stack.Screen name="Profile" component={Profile} options={{ title: "Perfil" }} />
   </Stack.Navigator>
 );

@@ -1,9 +1,10 @@
-import React from 'react';
-import { View, Text } from 'react-native';
+import React from "react";
+import { View, Text } from "react-native";
+import { main } from "../../styles";
 
 export const CounselorsMain = () => {
   return (
-    <View>
+    <View style={main.container}>
       <Text>Lista de consejeros</Text>
     </View>
   );
