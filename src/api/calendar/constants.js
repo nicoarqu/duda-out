@@ -59,3 +59,37 @@ export const data = [
     location: "Activity Center",
   },
 ];
+
+export const localeES = {
+  monthNames: [
+    "Enero",
+    "Febrero",
+    "Marzo",
+    "Abril",
+    "Mayo",
+    "Junio",
+    "Julio",
+    "Agosto",
+    "Septembre",
+    "Octubre",
+    "Noviembre",
+    "Diciembre",
+  ],
+  monthNamesShort: [
+    "Ene.",
+    "Feb.",
+    "Mar",
+    "Abr",
+    "May.",
+    "Jun.",
+    "Jul..",
+    "Ago.",
+    "Sep.",
+    "Oct.",
+    "Nov.",
+    "Dic.",
+  ],
+  dayNames: ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"],
+  dayNamesShort: ["Lun.", "Mar.", "Miér.", "Jue.", "Vie.", "Sáb", "Dom."],
+  today: "Hoy",
+};

@@ -24,6 +24,11 @@ export class CalendarWeek extends Component {
     Alert.alert("onEventPress", JSON.stringify(evt));
   };
 
+  seeMonthView = () => {
+    const { navigation } = this.props;
+    navigation.navigate("CalendarMonth");
+  };
+
   render() {
     // console.log(this.pivotDate);
     return (
@@ -43,7 +48,7 @@ export class CalendarWeek extends Component {
           />
         </View>
         <View>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={this.seeMonthView}>
             <Text>Vista mensual</Text>
           </TouchableOpacity>
         </View>
@@ -51,12 +56,3 @@ export class CalendarWeek extends Component {
     );
   }
 }
-
-/**
- *
-<View>
-  <TouchableOpacity>
-    <Text>Vista mensual</Text>
-  </TouchableOpacity>
-</View>
- */
