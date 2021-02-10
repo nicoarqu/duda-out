@@ -4,7 +4,7 @@ export const colors = {
   gray: "#808080",
   blue: "#1673FF",
   lightBlue: "#E7F0F8",
-  white: "white",
+  white: "#FFFFFF",
 };
 
 export const stackHeader = {
@@ -21,4 +21,5 @@ export const titleHeader = {
 
 export const main = StyleSheet.create({
   container: { flex: 1, margin: 20, alignItems: "center" },
+  flexOne: { flex: 1 },
 });
