@@ -1,1 +1,2 @@
-export { CalendarWeek } from './CalendarWeek';
+export { CalendarWeek } from "./CalendarWeek";
+export { CalendarMonth } from "./CalendarMonth";
