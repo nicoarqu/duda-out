@@ -37,6 +37,19 @@ export const main = StyleSheet.create({
     shadowOpacity: 0.18,
     shadowRadius: 1.0,
   },
+  input: {
+    width: 250,
+    borderColor: colors.blue,
+    borderRadius: 4,
+    borderWidth: 2,
+    marginVertical: 8,
+  },
+  textInput: {
+    borderColor: colors.gray,
+    borderWidth: 2,
+    borderRadius: 4,
+    marginVertical: 4,
+  },
   subcontainer: {
     flex: 1,
     alignItems: "center",
