@@ -1,25 +1,37 @@
 import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { programs } from "../../api/programs/constants";
-import { main } from "../../styles";
+import { main, programStyles } from "../../styles";
 
 export const ProgramsList = ({ navigation }) => {
   return (
     <View style={main.container}>
-      <Text>En esta sección encontrarás algunos de los programas que tiene la universidad</Text>
-      <Text>Si ya has asistido, ¡evalúalas!</Text>
-      {programs.forEach((group) => (
-        <TouchableOpacity
-          onPress={() =>
-            navigation.navigate("ProgramGroup", {
-              groupItems: group.items,
-              name: group.title,
-            })
-          }
-        >
-          <Text>{group.title}</Text>
-        </TouchableOpacity>
-      ))}
+      <View style={main.subcontainer}>
+        <View style={programStyles.infoView}>
+          <Text style={programStyles.infoText}>
+            En esta sección encontrarás algunos de los programas que tiene la universidad.
+          </Text>
+          <Text style={programStyles.infoText}>Si ya has asistido, ¡evalúalas!</Text>
+        </View>
+        <View style={programStyles.buttonsContainer}>
+          {programs.map((group) => (
+            <View style={programStyles.buttonView}>
+              <TouchableOpacity
+                style={programStyles.button}
+                key={group.id}
+                onPress={() =>
+                  navigation.navigate("ProgramGroup", {
+                    groupItems: group.items,
+                    name: group.title,
+                  })
+                }
+              >
+                <Text style={programStyles.infoButton}>{group.title}</Text>
+              </TouchableOpacity>
+            </View>
+          ))}
+        </View>
+      </View>
     </View>
   );
 };
