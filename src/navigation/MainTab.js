@@ -18,14 +18,6 @@ export const MainTab = () => (
     barStyle={{ backgroundColor: colors.lightBlue }}
   >
     <Tab.Screen
-      name="Calendario"
-      children={CalendarStack}
-      options={{
-        tabBarLabel: "Calendario",
-        tabBarIcon: ({ color }) => <MaterialIcons name="event" color={color} size={26} />,
-      }}
-    />
-    <Tab.Screen
       name="Consejeros"
       children={CounselorsStack}
       options={{
@@ -51,3 +43,14 @@ export const MainTab = () => (
     />
   </Tab.Navigator>
 );
+
+/**
+ *  <Tab.Screen
+      name="Calendario"
+      children={CalendarStack}
+      options={{
+        tabBarLabel: "Calendario",
+        tabBarIcon: ({ color }) => <MaterialIcons name="event" color={color} size={26} />,
+      }}
+    />
+ */

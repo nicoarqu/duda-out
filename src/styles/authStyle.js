@@ -31,10 +31,22 @@ export const authStyle = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  formQuiz: {
+    padding: 24,
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: colors.white,
+  },
+  formControl: {
+    width: 250,
+    margin: 5,
+  },
   header: {
     flexDirection: "column",
     alignContent: "center",
   },
+  helpText: { fontSize: 16 },
   link: {
     alignItems: "center",
     justifyContent: "center",
@@ -47,6 +59,10 @@ export const authStyle = StyleSheet.create({
     width: 150,
     height: 100,
     resizeMode: "contain",
+  },
+  radioButtonView: {
+    flexDirection: "row",
+    alignItems: "center",
   },
   subcontainer: {
     flex: 1,
