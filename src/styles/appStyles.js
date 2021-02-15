@@ -21,11 +21,28 @@ export const titleHeader = {
 };
 
 export const main = StyleSheet.create({
+  button: {
+    backgroundColor: colors.blue,
+    paddingVertical: 10,
+    paddingHorizontal: 30,
+    marginTop: 4,
+    borderRadius: 4,
+  },
+  buttonText: {
+    color: colors.white,
+    textAlign: "center",
+    fontWeight: "bold",
+  },
+  buttonView: {
+    paddingVertical: 12,
+    flex: 0.1,
+  },
   container: {
     flex: 1,
     margin: 20,
   },
   flexOne: { flex: 1 },
+  flexGrowOne: { flexGrow: 1 },
   floatingBox: {
     padding: 12,
     borderRadius: 4,

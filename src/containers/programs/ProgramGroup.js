@@ -9,10 +9,9 @@ export const ProgramGroup = ({ route, navigation }) => {
       <View style={main.subcontainer}>
         <View style={programStyles.buttonsContainer}>
           {groupItems.map((program) => (
-            <View style={programStyles.buttonView}>
+            <View style={programStyles.buttonView} key={program.id}>
               <TouchableOpacity
                 style={programStyles.button}
-                key={program.id}
                 onPress={() =>
                   navigation.navigate("ProgramInfo", {
                     program,
