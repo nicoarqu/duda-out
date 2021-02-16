@@ -1,17 +1,41 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, TextInput, TouchableOpacity, Image } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { db, Firebase } from "../../config/Firebase";
 import { main, authStyle } from "../../styles";
 
 export const LogIn = ({ navigation }) => {
   const [state, setState] = useState({
-    mail: "",
+    email: "",
     password: "",
     isLoading: false,
   });
 
   const checkLogin = () => {
-    navigation.replace("MainTab");
+    const { email, password } = state;
+    Firebase.auth()
+      .signInWithEmailAndPassword(email, password)
+      .then((res) => {
+        const { uid } = res.user;
+        const usersRef = db.collection("users");
+        usersRef
+          .doc(uid)
+          .get()
+          .then((document) => {
+            if (document.exists) {
+              const user = document.data();
+              navigation.replace("MainTab");
+            } else {
+              alert("Usuario ya no existe");
+            }
+          })
+          .catch((error) => {
+            alert(error);
+          });
+      })
+      .catch((error) => {
+        alert(error);
+      });
   };
 
   return (
@@ -34,7 +58,7 @@ export const LogIn = ({ navigation }) => {
           <View style={authStyle.subcontainer}>
             <TextInput
               placeholder="correo@ejemplo.cl"
-              onChangeText={(text) => setState({ ...state, mail: text.trim() })}
+              onChangeText={(text) => setState({ ...state, email: text.trim() })}
               value={state.mail}
               autoCapitalize="none"
               style={main.input}

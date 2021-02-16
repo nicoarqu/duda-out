@@ -1,6 +1,6 @@
 import React from "react";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
-import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+import { MaterialIcons } from "@expo/vector-icons";
 import { CalendarStack } from "./CalendarStack";
 import { CounselorsStack } from "./CounselorsStack";
 import { ProgramsStack } from "./ProgramsStack";
