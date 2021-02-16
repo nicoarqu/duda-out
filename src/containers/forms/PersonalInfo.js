@@ -5,7 +5,6 @@ import { RadioButton } from "react-native-paper";
 import { main, authStyle } from "../../styles";
 
 export const PersonalInfo = ({ navigation }) => {
-  const [checked, setChecked] = useState("");
   const [livingWith, setLivingWith] = useState("");
   const [isWorking, setIsWorking] = useState("");
   const [grant, setGrant] = useState("");
