@@ -5,10 +5,14 @@ import { main } from "../../styles";
 export const Profile = ({ navigation }) => {
   return (
     <View style={main.container}>
-      <Text>Mi perfil</Text>
-      <TouchableOpacity onPress={() => navigation.replace("LogIn")}>
-        <Text>Cerrar sesión</Text>
-      </TouchableOpacity>
+      <View style={main.subcontainer}>
+        <Text>Mi perfil</Text>
+        <View style={main.buttonView}>
+          <TouchableOpacity onPress={() => navigation.replace("LogIn")} style={main.button}>
+            <Text style={main.buttonText}>Cerrar sesión</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
     </View>
   );
 };
