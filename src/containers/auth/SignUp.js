@@ -27,6 +27,7 @@ export const SignUp = ({ navigation }) => {
           email,
           firstName,
           lastName,
+          hasInfo: false,
         };
         const usersRef = db.collection("users");
         usersRef
@@ -34,7 +35,7 @@ export const SignUp = ({ navigation }) => {
           .set(data)
           .then(() => {
             dispatch(logIn(0, 0, uid));
-            navigation.replace("MainTab");
+            navigation.replace("PersonalInfo");
           })
           .catch((error) => {
             alert(error);
