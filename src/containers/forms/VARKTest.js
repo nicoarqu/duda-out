@@ -2,19 +2,35 @@ import React, { useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { RadioButton, Checkbox } from "react-native-paper";
+import { useSelector } from "react-redux";
 import { VARKQuestions } from "../../api/forms/constants";
+import { db } from "../../config/Firebase";
 import { main, authStyle } from "../../styles";
 
 export const VARKTest = ({ navigation }) => {
   const [options, setOptions] = useState({});
   const count = { a: 0, v: 0, r: 0, k: 0 };
+  const scores = { a: 0, v: 0, r: 0, k: 0 };
+  const uid = useSelector((state) => state.auth.currentUserId);
 
   const checkTest = () => {
     Object.keys(options).forEach((key) => {
       count[options[key]] += 1;
     });
-    console.log(count);
-    // navigation.push("PersonalInfo");
+    Object.keys(count).forEach((key) => {
+      scores[key] = Number(((count[key] * 100) / 16).toFixed(2));
+    });
+    const VARKresults = {
+      visual: scores.v,
+      aural: scores.a,
+      readWrite: scores.r,
+      kinesthetic: scores.k,
+    };
+    db.collection("users")
+      .doc(uid)
+      .update({ VARKresults, hasVARKTest: true })
+      .then(navigation.replace("MainTab"))
+      .catch((error) => alert(error));
   };
 
   return (

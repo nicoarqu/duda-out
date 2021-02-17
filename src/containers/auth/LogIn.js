@@ -28,8 +28,9 @@ export const LogIn = ({ navigation }) => {
             if (document.exists) {
               const user = document.data();
               dispatch(logIn(0, 0, user.uid));
-              if (user.hasInfo) navigation.replace("MainTab");
-              else navigation.push("PersonalInfo");
+              if (user.hasInfo && user.hasVARKTest) navigation.replace("MainTab");
+              else if (!user.hasInfo) navigation.push("PersonalInfo");
+              else navigation.push("VARKTest");
             } else {
               alert("Usuario ya no existe");
             }
