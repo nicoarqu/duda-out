@@ -13,7 +13,7 @@ export const Profile = ({ navigation }) => {
       .signOut()
       .then(() => {
         dispatch(logOut());
-        navigation.replace("Login");
+        navigation.replace("LogIn");
       })
       .catch((error) => alert(error));
   };
