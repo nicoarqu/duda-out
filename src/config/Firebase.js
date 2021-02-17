@@ -21,5 +21,8 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-export const Firebase = firebase.initializeApp(firebaseConfig);
-export const db = firebase.firestore();
+const Firebase = !firebase.apps.length ? firebase.initializeApp(firebaseConfig) : firebase.app();
+const fireAuth = Firebase.auth();
+fireAuth.languageCode = "es";
+const db = firebase.firestore();
+export { fireAuth, db };

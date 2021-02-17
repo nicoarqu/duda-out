@@ -1,22 +1,22 @@
 const initialState = {
   currentUserRole: null,
   currentToken: null,
-  currentUserId: null
+  currentUserId: null,
 };
 
 export function authReducer(state = initialState, action) {
   switch (action.type) {
-    case 'LOG_IN':
+    case "LOG_IN":
       return {
         currentToken: action.payload.accessToken,
         currentUserRole: action.payload.role,
-        currentUserId: action.payload.id
+        currentUserId: action.payload.uid,
       };
-    case 'LOG_OUT':
+    case "LOG_OUT":
       return {
         currentUserRole: null,
         currentToken: null,
-        currentUserId: null
+        currentUserId: null,
       };
     default:
       return state;

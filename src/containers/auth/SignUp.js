@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { View, Text, Image, TextInput, TouchableOpacity } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { Firebase, db } from "../../config/Firebase";
+import { useDispatch } from "react-redux";
+import { fireAuth, db } from "../../config/Firebase";
+import { logIn } from "../../redux/actions/authActions";
 import { main, authStyle } from "../../styles";
 
 export const SignUp = ({ navigation }) => {
@@ -12,10 +14,11 @@ export const SignUp = ({ navigation }) => {
     password: "",
     isLoading: false,
   });
+  const dispatch = useDispatch();
 
   const handleSignUp = () => {
     const { email, password, firstName, lastName } = state;
-    Firebase.auth()
+    fireAuth
       .createUserWithEmailAndPassword(email, password)
       .then((response) => {
         const { uid } = response.user;
@@ -30,6 +33,7 @@ export const SignUp = ({ navigation }) => {
           .doc(uid)
           .set(data)
           .then(() => {
+            dispatch(logIn(0, 0, uid));
             navigation.replace("MainTab");
           })
           .catch((error) => {

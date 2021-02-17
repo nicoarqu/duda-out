@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, TextInput, TouchableOpacity, Image } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { db, Firebase } from "../../config/Firebase";
+import { useDispatch } from "react-redux";
+import { db, fireAuth } from "../../config/Firebase";
+import { logIn } from "../../redux/actions/authActions";
 import { main, authStyle } from "../../styles";
 
 export const LogIn = ({ navigation }) => {
@@ -10,10 +12,11 @@ export const LogIn = ({ navigation }) => {
     password: "",
     isLoading: false,
   });
+  const dispatch = useDispatch();
 
   const checkLogin = () => {
     const { email, password } = state;
-    Firebase.auth()
+    fireAuth
       .signInWithEmailAndPassword(email, password)
       .then((res) => {
         const { uid } = res.user;
@@ -24,6 +27,7 @@ export const LogIn = ({ navigation }) => {
           .then((document) => {
             if (document.exists) {
               const user = document.data();
+              dispatch(logIn(0, 0, user.uid));
               navigation.replace("MainTab");
             } else {
               alert("Usuario ya no existe");

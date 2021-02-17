@@ -1,13 +1,13 @@
-export const logIn = (accessToken, role, userId) => ({
-  type: 'LOG_IN',
+export const logIn = (accessToken, role, uid) => ({
+  type: "LOG_IN",
   payload: {
     accessToken,
     role,
-    id: userId
-  }
+    uid,
+  },
 });
 
 export const logOut = () => ({
-  type: 'LOG_OUT',
-  payload: null
+  type: "LOG_OUT",
+  payload: null,
 });
