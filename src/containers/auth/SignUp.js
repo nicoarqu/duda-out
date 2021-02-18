@@ -28,6 +28,7 @@ export const SignUp = ({ navigation }) => {
           firstName,
           lastName,
           hasInfo: false,
+          conversations: [],
         };
         const usersRef = db.collection("users");
         usersRef
