@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { getItemData } from "../../api/forms/getItemData";
-import VARKBox from "../../components/programs/VARKBox";
+import { VARKBox } from "../../components/profile/VARKBox";
 import { fireAuth } from "../../config/Firebase";
 import { logOut } from "../../redux/actions/authActions";
 import { main } from "../../styles";
