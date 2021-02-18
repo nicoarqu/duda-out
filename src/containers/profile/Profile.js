@@ -1,12 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+
 import { View, Text, TouchableOpacity } from "react-native";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getItemData } from "../../api/forms/getItemData";
+import VARKBox from "../../components/programs/VARKBox";
 import { fireAuth } from "../../config/Firebase";
 import { logOut } from "../../redux/actions/authActions";
 import { main } from "../../styles";
 
 export const Profile = ({ navigation }) => {
+  const uid = useSelector((state) => state.auth.currentUserId);
   const dispatch = useDispatch();
+  const [user, setUser] = useState({ username: "", VARK: {} });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const userData = await getItemData("users", uid);
+      const { firstName, VARKresults } = userData;
+      setUser({ firstName, VARK: VARKresults });
+    };
+    fetchData();
+  }, []);
 
   const handleLogout = () => {
     fireAuth
@@ -20,7 +34,8 @@ export const Profile = ({ navigation }) => {
   return (
     <View style={main.container}>
       <View style={main.subcontainer}>
-        <Text>Mi perfil</Text>
+        <Text>Hola {user.firstName} !</Text>
+        <VARKBox user={user} />
         <View style={main.buttonView}>
           <TouchableOpacity onPress={handleLogout} style={main.button}>
             <Text style={main.buttonText}>Cerrar sesión</Text>
