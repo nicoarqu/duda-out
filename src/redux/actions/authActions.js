@@ -1,9 +1,9 @@
-export const logIn = (accessToken, role, uid) => ({
+export const logIn = (username, role, uid) => ({
   type: "LOG_IN",
   payload: {
-    accessToken,
     role,
     uid,
+    username,
   },
 });
 

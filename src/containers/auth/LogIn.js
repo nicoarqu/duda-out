@@ -27,7 +27,8 @@ export const LogIn = ({ navigation }) => {
           .then((document) => {
             if (document.exists) {
               const user = document.data();
-              dispatch(logIn(0, 0, user.uid));
+              const username = `${user.firstName} ${user.lastName}`;
+              dispatch(logIn(username, 0, user.uid));
               if (user.hasInfo && user.hasVARKTest) navigation.replace("MainTab");
               else if (!user.hasInfo) navigation.push("PersonalInfo");
               else navigation.push("VARKTest");
