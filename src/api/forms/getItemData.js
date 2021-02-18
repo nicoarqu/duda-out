@@ -2,5 +2,7 @@ import { db } from "../../config/Firebase";
 
 export const getItemData = async (collectionName, cId) => {
   const item = await db.collection(collectionName).doc(cId).get();
-  return item.data();
+  const data = item.data();
+  data.id = item.id;
+  return data;
 };
