@@ -36,7 +36,7 @@ export const authStyle = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: colors.white,
+    // backgroundColor: colors.white,
   },
   formControl: {
     width: 250,

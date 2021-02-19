@@ -3,6 +3,7 @@ import { View, Text } from "react-native";
 import { AirbnbRating } from "react-native-ratings";
 import { useSelector } from "react-redux";
 import { db } from "../../config/Firebase";
+import { programStyles } from "../../styles";
 
 export const StarRating = ({ programId }) => {
   const reviews = ["Pésimo", "Malo", "Piola", "Bueno", "Lo mejor!"];
@@ -44,8 +45,8 @@ export const StarRating = ({ programId }) => {
   };
 
   return (
-    <View>
-      <Text>¿Cómo calificas el programa?</Text>
+    <View style={programStyles.ratingView}>
+      <Text style={programStyles.subtitle}>¿Cómo calificas el programa?</Text>
       <AirbnbRating
         reviews={reviews}
         count={5}
