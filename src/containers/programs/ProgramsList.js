@@ -11,7 +11,7 @@ export const ProgramsList = ({ navigation }) => {
           <Text style={programStyles.infoText}>
             En esta sección encontrarás algunos de los programas que tiene la universidad.
           </Text>
-          <Text style={programStyles.infoText}>Si ya has asistido, ¡evalúalas!</Text>
+          <Text style={programStyles.infoText}>Si ya has asistido, ¡evalúalos!</Text>
         </View>
         <View style={programStyles.buttonsContainer}>
           {programs.map((group) => (

@@ -44,6 +44,18 @@ export const programStyles = StyleSheet.create({
   titleText: {
     textAlign: "center",
     fontSize: 20,
-    marginBottom: 12,
+    fontWeight: "bold",
+    marginBottom: 10,
+  },
+  subtitle: {
+    textAlign: "center",
+    fontSize: 16,
+  },
+  star: { color: colors.starYellow },
+  rating: {
+    flexDirection: "row",
+  },
+  ratingView: {
+    marginVertical: "2%",
   },
 });

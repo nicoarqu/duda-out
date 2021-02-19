@@ -1,1 +1,2 @@
-export { CounselorsMain } from './CounselorsMain';
+export { CounselorsMain } from "./CounselorsMain";
+export { Chat } from "./Chat";

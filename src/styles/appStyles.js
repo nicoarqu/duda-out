@@ -10,6 +10,7 @@ export const colors = {
   lightBlue: "#E7F0F8",
   white: "#FFFFFF",
   black: "#000000",
+  starYellow: "#f9b313",
 };
 
 export const titleHeader = {

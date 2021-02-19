@@ -1,19 +1,51 @@
 import React, { useState } from "react";
 import { View, Text, Image, TextInput, TouchableOpacity } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { useDispatch } from "react-redux";
+import { fireAuth, db } from "../../config/Firebase";
+import { logIn } from "../../redux/actions/authActions";
 import { main, authStyle } from "../../styles";
 
 export const SignUp = ({ navigation }) => {
   const [state, setState] = useState({
     firstName: "",
     lastName: "",
-    mail: "",
+    email: "",
     password: "",
     isLoading: false,
   });
+  const dispatch = useDispatch();
 
-  const checkSignUp = () => {
-    navigation.replace("MainTab");
+  const handleSignUp = () => {
+    const { email, password, firstName, lastName } = state;
+    fireAuth
+      .createUserWithEmailAndPassword(email, password)
+      .then((response) => {
+        const { uid } = response.user;
+        const data = {
+          uid,
+          email,
+          firstName,
+          lastName,
+          hasInfo: false,
+          conversations: [],
+          role: 0,
+        };
+        const usersRef = db.collection("users");
+        usersRef
+          .doc(uid)
+          .set(data)
+          .then(() => {
+            dispatch(logIn(0, 0, uid));
+            navigation.replace("PersonalInfo");
+          })
+          .catch((error) => {
+            alert(error);
+          });
+      })
+      .catch((error) => {
+        alert(error);
+      });
   };
 
   return (
@@ -50,8 +82,8 @@ export const SignUp = ({ navigation }) => {
             />
             <TextInput
               placeholder="correo@ejemplo.cl"
-              onChangeText={(text) => setState({ ...state, mail: text.trim() })}
-              value={state.mail}
+              onChangeText={(text) => setState({ ...state, email: text.trim() })}
+              value={state.email}
               autoCapitalize="none"
               style={main.input}
             />
@@ -65,7 +97,7 @@ export const SignUp = ({ navigation }) => {
             />
           </View>
           <View style={authStyle.buttonView}>
-            <TouchableOpacity onPress={() => checkSignUp()} style={authStyle.button}>
+            <TouchableOpacity onPress={() => handleSignUp()} style={authStyle.button}>
               <Text style={authStyle.buttonText}>Registrarme</Text>
             </TouchableOpacity>
           </View>
