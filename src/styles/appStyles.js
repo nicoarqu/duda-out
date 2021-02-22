@@ -11,6 +11,7 @@ export const colors = {
   white: "#FFFFFF",
   black: "#000000",
   starYellow: "#f9b313",
+  modalBackground: "#ebf2f2",
 };
 
 export const titleHeader = {
@@ -41,6 +42,7 @@ export const main = StyleSheet.create({
   container: {
     flex: 1,
     margin: 20,
+    backgroundColor: colors.white,
   },
   flexOne: { flex: 1 },
   flexGrowOne: { flexGrow: 1 },

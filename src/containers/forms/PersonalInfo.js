@@ -3,6 +3,7 @@ import { View, TextInput, Text, TouchableOpacity } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { RadioButton } from "react-native-paper";
 import { useSelector } from "react-redux";
+import { PersonalInfoBanner } from "../../components/forms/PersonalInfoBanner";
 import { db } from "../../config/Firebase";
 import { main, authStyle } from "../../styles";
 
@@ -18,6 +19,7 @@ export const PersonalInfo = ({ navigation }) => {
   const [studyOption, setStudyOption] = useState("");
 
   const uid = useSelector((state) => state.auth.currentUserId);
+  const [modalVisible, setModalVisible] = useState(true);
 
   const handleSubmit = () => {
     db.collection("users")
@@ -34,7 +36,7 @@ export const PersonalInfo = ({ navigation }) => {
         studyOption,
         hasInfo: true,
       })
-      .then(navigation.push("VARKTest"))
+      .then(navigation.replace("VARKTest"))
       .catch((error) => alert(error));
   };
 
@@ -44,6 +46,7 @@ export const PersonalInfo = ({ navigation }) => {
       enableOnAndroid
       keyboardShouldPersistTaps="always"
     >
+      <PersonalInfoBanner modalVisible={modalVisible} setModalVisible={setModalVisible} />
       <View style={[main.container, main.floatingBox]}>
         <View style={authStyle.formQuiz}>
           <Text style={authStyle.title}>Información personal</Text>
@@ -191,7 +194,7 @@ export const PersonalInfo = ({ navigation }) => {
           </View>
           <View style={authStyle.buttonView}>
             <TouchableOpacity onPress={handleSubmit} style={authStyle.button}>
-              <Text style={authStyle.buttonText}>Ingresar</Text>
+              <Text style={authStyle.buttonText}>Continuar</Text>
             </TouchableOpacity>
           </View>
         </View>
