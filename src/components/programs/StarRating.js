@@ -4,7 +4,15 @@ import { AirbnbRating } from "react-native-ratings";
 import { db } from "../../config/Firebase";
 import { programStyles } from "../../styles";
 
-export const StarRating = ({ programId, updateProgram, rate, setRate, ratingId, setRatingId }) => {
+export const StarRating = ({
+  programId,
+  updateProgram,
+  rate,
+  setRate,
+  ratingId,
+  setRatingId,
+  uid,
+}) => {
   const reviews = ["Pésimo", "Malo", "Piola", "Bueno", "Lo mejor!"];
 
   const finishRating = (rating) => {
