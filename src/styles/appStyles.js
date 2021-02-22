@@ -12,6 +12,7 @@ export const colors = {
   black: "#000000",
   starYellow: "#f9b313",
   modalBackground: "#ebf2f2",
+  warnRed: "#B33A3A",
 };
 
 export const titleHeader = {
