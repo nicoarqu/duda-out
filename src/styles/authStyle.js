@@ -60,6 +60,25 @@ export const authStyle = StyleSheet.create({
     height: 100,
     resizeMode: "contain",
   },
+  modalText: {
+    marginBottom: 15,
+    textAlign: "center",
+  },
+  modalView: {
+    margin: 24,
+    backgroundColor: colors.modalBackground,
+    borderRadius: 12,
+    padding: 32,
+    alignItems: "center",
+    shadowColor: colors.black,
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
   radioButtonView: {
     flexDirection: "row",
     alignItems: "center",
