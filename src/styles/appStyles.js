@@ -43,16 +43,16 @@ export const main = StyleSheet.create({
   container: {
     flex: 1,
     margin: 20,
-    backgroundColor: colors.white,
   },
   flexOne: { flex: 1 },
   flexGrowOne: { flexGrow: 1 },
   floatingBox: {
-    padding: 12,
+    backgroundColor: colors.white,
     borderRadius: 4,
     borderColor: colors.gray,
     borderWidth: 1,
     elevation: 1,
+    padding: 12,
     shadowColor: colors.black,
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.18,

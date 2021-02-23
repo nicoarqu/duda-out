@@ -17,6 +17,10 @@ export const CounselorsStack = () => (
       component={CounselorsInfo}
       options={{ title: "Consejeros" }}
     />
-    <Stack.Screen name="Chat" component={Chat} options={{ title: "Chat" }} />
+    <Stack.Screen
+      name="Chat"
+      component={Chat}
+      options={({ route }) => ({ title: route.params.title })}
+    />
   </Stack.Navigator>
 );
