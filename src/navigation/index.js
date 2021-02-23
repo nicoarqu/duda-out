@@ -11,6 +11,7 @@ const Stack = createStackNavigator();
 
 const MainStack = () => {
   const initial = fireAuth.currentUser ? "MainTab" : "LogIn";
+  // initial = "VARKTest";
   return (
     <Stack.Navigator initialRouteName={initial} screenOptions={stackHeader}>
       <Stack.Screen name="SignUp" component={SignUp} />
@@ -18,10 +19,13 @@ const MainStack = () => {
       <Stack.Screen
         name="PersonalInfo"
         component={PersonalInfo}
-        options={{ title: "Información personal" }}
+        options={{ title: "Cuéntanos de ti" }}
       />
-
-      <Stack.Screen name="VARKTest" component={VARKTest} options={{ title: "Test VARK" }} />
+      <Stack.Screen
+        name="VARKTest"
+        component={VARKTest}
+        options={{ title: "Test de habilidades" }}
+      />
       <Stack.Screen name="MainTab" children={MainTab} />
     </Stack.Navigator>
   );

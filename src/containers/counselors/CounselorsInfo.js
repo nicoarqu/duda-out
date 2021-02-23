@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
+import { useSelector } from "react-redux";
 import { getCounselors } from "../../api/counselors/getCounselors";
+import { db } from "../../config/Firebase";
 import { main, counselorStyle } from "../../styles";
 
 export const CounselorsInfo = ({ navigation }) => {
-  const [counselors, setCounselor] = useState([
-    { id: "1", firstName: "Mario", counselorDesc: "Mario sabe mucho de vida universitaria" },
-    { id: "2", firstName: "Juana", counselorDesc: "Juana sabe mucho de vida universitaria" },
-  ]);
+  const [counselors, setCounselor] = useState([]);
+
+  const uid = useSelector((state) => state.auth.currentUserId);
 
   useEffect(() => {
     async function fetchData() {
@@ -18,7 +19,22 @@ export const CounselorsInfo = ({ navigation }) => {
     fetchData();
   }, []);
 
-  const openChat = () => {};
+  const openChat = async (counselorId) => {
+    const querySnapshot = await db
+      .collection("conversations")
+      .where("studentId", "==", uid)
+      .where("counselorId", "==", counselorId)
+      .limit(1)
+      .get();
+    if (!querySnapshot.empty) {
+      const chat = querySnapshot.docs[0];
+      navigation.navigate("Chat", { chatId: chat.id });
+    } else {
+      // create new chat
+      const newChat = await db.collection("conversations").add({ counselorId, studentId: uid });
+      navigation.navigate("Chat", { chatId: newChat.id });
+    }
+  };
 
   return (
     <View style={main.container}>
@@ -32,10 +48,10 @@ export const CounselorsInfo = ({ navigation }) => {
         <FlatList
           data={counselors}
           renderItem={({ item }) => (
-            <View key={item.id}>
+            <View key={item.counselorId}>
               <Text>{item.firstName}</Text>
               <Text>{item.desc}</Text>
-              <TouchableOpacity onPress={() => openChat()} style={counselorStyle.button}>
+              <TouchableOpacity onPress={() => openChat(item.uid)} style={counselorStyle.button}>
                 <Text>Habla con {item.firstName}</Text>
               </TouchableOpacity>
             </View>

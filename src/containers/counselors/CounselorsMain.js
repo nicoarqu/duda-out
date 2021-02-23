@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, FlatList, TouchableOpacity } from "react-native";
 import { useSelector } from "react-redux";
-import { getConversations } from "../../api/counselors/getConversations";
+import { db } from "../../config/Firebase";
+import { getItemData } from "../../api/forms/getItemData";
 import { counselorStyle, main } from "../../styles";
 
 export const CounselorsMain = ({ navigation }) => {
@@ -9,11 +10,24 @@ export const CounselorsMain = ({ navigation }) => {
   const uid = useSelector((state) => state.auth.currentUserId);
 
   useEffect(() => {
-    async function fetchData() {
-      const result = await getConversations(uid);
-      setConversations(result);
+    async function fetchConversations() {
+      const querySnapshot = await db
+        .collection("conversations")
+        .where("studentId", "==", uid)
+        .get();
+      if (!querySnapshot.empty) {
+        const res = await Promise.all(
+          querySnapshot.docs.map(async (chat) => {
+            const { id } = chat;
+            const data = chat.data();
+            const user = await getItemData("users", data.counselorId);
+            return { ...data, id, counselorName: user.firstName };
+          })
+        );
+        setConversations(res);
+      }
     }
-    fetchData();
+    fetchConversations();
   }, []);
 
   return (
