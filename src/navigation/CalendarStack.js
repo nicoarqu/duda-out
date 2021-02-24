@@ -1,12 +1,12 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { CalendarWeek, CalendarMonth } from "../containers/calendar";
-import { titleHeader } from "../styles";
+import { headerStyle } from "../styles";
 
 const Stack = createStackNavigator();
 
 export const CalendarStack = () => (
-  <Stack.Navigator screenOptions={titleHeader}>
+  <Stack.Navigator screenOptions={headerStyle.titleHeader}>
     <Stack.Screen
       name="CalendarWeek"
       component={CalendarWeek}

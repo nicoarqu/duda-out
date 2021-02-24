@@ -94,7 +94,6 @@ export const PersonalInfo = ({ navigation }) => {
       <PersonalInfoBanner modalVisible={modalVisible} setModalVisible={setModalVisible} />
       <View style={[main.container, main.floatingBox]}>
         <View style={authStyle.formQuiz}>
-          <Text style={authStyle.title}>Información personal</Text>
           <View style={authStyle.formControl}>
             <Text>Ingresa tu universidad</Text>
             <TextInput

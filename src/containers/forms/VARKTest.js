@@ -58,7 +58,6 @@ export const VARKTest = ({ navigation }) => {
       keyboardShouldPersistTaps="always"
     >
       <View style={[main.container, main.floatingBox]}>
-        <Text style={authStyle.title}>Test de Habilidades</Text>
         <View style={authStyle.formQuiz}>
           {VARKQuestions.map((q) => {
             return (

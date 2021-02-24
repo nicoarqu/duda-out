@@ -1,9 +1,5 @@
 import { StyleSheet } from "react-native";
 
-export const stackHeader = {
-  headerShown: false,
-};
-
 export const colors = {
   gray: "#808080",
   blue: "#1673FF",
@@ -15,12 +11,24 @@ export const colors = {
   warnRed: "#B33A3A",
 };
 
-export const titleHeader = {
-  headerStyle: {
-    backgroundColor: colors.blue,
+export const headerStyle = {
+  barStyle: {
+    backgroundColor: colors.lightBlue,
   },
-  headerTintColor: colors.white,
-  headerTitleAlign: "center",
+  hideHeader: {
+    headerShown: false,
+  },
+  titleHeader: {
+    headerStyle: {
+      backgroundColor: colors.blue,
+    },
+    headerTintColor: colors.white,
+    headerTitleAlign: "center",
+    headerTitleStyle: {
+      fontFamily: "BitterRegular",
+      fontSize: 24,
+    },
+  },
 };
 
 export const main = StyleSheet.create({

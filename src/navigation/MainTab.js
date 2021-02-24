@@ -1,11 +1,11 @@
 import React from "react";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import { MaterialIcons } from "@expo/vector-icons";
-import { CalendarStack } from "./CalendarStack";
+// import { CalendarStack } from "./CalendarStack";
 import { CounselorsStack } from "./CounselorsStack";
 import { ProgramsStack } from "./ProgramsStack";
 import { ProfileStack } from "./ProfileStack";
-import { colors } from "../styles";
+import { headerStyle, colors } from "../styles";
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -15,7 +15,7 @@ export const MainTab = () => (
     shifting={false}
     activeColor={colors.blue}
     inactiveColor={colors.gray}
-    barStyle={{ backgroundColor: colors.lightBlue }}
+    barStyle={headerStyle.barStyle}
   >
     <Tab.Screen
       name="Consejeros"

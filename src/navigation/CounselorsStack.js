@@ -1,12 +1,12 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { CounselorsMain, Chat, CounselorsInfo } from "../containers/counselors";
-import { titleHeader } from "../styles";
+import { headerStyle } from "../styles";
 
 const Stack = createStackNavigator();
 
 export const CounselorsStack = () => (
-  <Stack.Navigator screenOptions={titleHeader}>
+  <Stack.Navigator screenOptions={headerStyle.titleHeader}>
     <Stack.Screen
       name="CounselorsMain"
       component={CounselorsMain}

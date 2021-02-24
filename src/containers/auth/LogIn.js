@@ -114,7 +114,7 @@ export const LogIn = ({ navigation }) => {
           </View>
         </View>
         <View style={authStyle.link}>
-          <Text onPress={() => navigation.push("SignUp")} style={authStyle.linkText}>
+          <Text onPress={() => navigation.replace("SignUp")} style={authStyle.linkText}>
             ¿No tienes cuenta? Regístrate aquí
           </Text>
         </View>

@@ -159,7 +159,7 @@ export const SignUp = ({ navigation }) => {
           </View>
         </View>
         <View style={authStyle.link}>
-          <Text onPress={() => navigation.push("LogIn")} style={authStyle.linkText}>
+          <Text onPress={() => navigation.replace("LogIn")} style={authStyle.linkText}>
             ¿Ya tienes cuenta? Inicia sesión
           </Text>
         </View>
