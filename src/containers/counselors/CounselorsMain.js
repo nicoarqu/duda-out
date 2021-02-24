@@ -34,9 +34,9 @@ export const CounselorsMain = ({ navigation }) => {
   return (
     <View style={main.container}>
       <ChatList conversations={conversations} navigation={navigation} />
-      <View style={main.subcontainer}>
-        <TouchableOpacity onPress={() => navigation.navigate("CounselorsInfo")}>
-          <Text>Conoce a tus consejeras/os</Text>
+      <View style={main.buttonView}>
+        <TouchableOpacity onPress={() => navigation.navigate("CounselorsInfo")} style={main.button}>
+          <Text style={main.buttonText}>Conoce a tus consejeras/os</Text>
         </TouchableOpacity>
       </View>
     </View>
