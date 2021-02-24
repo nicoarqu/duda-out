@@ -42,8 +42,9 @@ export const authStyle = StyleSheet.create({
     // backgroundColor: colors.white,
   },
   formControl: {
+    marginHorizontal: 10,
+    marginVertical: 20,
     width: 250,
-    margin: 5,
   },
   header: {
     flexDirection: "column",
@@ -51,6 +52,12 @@ export const authStyle = StyleSheet.create({
   },
   helpText: {
     fontSize: 16,
+  },
+  textLabel: {
+    fontFamily: "BitterRegular",
+    fontSize: 16,
+    marginBottom: 4,
+    textAlign: "left",
   },
   textInputAuth: {
     borderColor: colors.blue,
@@ -70,6 +77,11 @@ export const authStyle = StyleSheet.create({
     marginLeft: 6,
     fontFamily: "RobotoLight",
   },
+  textOption: {
+    fontFamily: "RobotoRegular",
+    fontSize: 14,
+    textAlign: "justify",
+  },
   link: {
     alignItems: "center",
     justifyContent: "center",
@@ -86,8 +98,10 @@ export const authStyle = StyleSheet.create({
     resizeMode: "contain",
   },
   modalText: {
-    marginBottom: 15,
-    textAlign: "center",
+    fontFamily: "BitterRegular",
+    fontSize: 15,
+    marginBottom: 16,
+    textAlign: "justify",
   },
   modalView: {
     margin: 24,

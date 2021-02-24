@@ -81,6 +81,9 @@ export const main = StyleSheet.create({
     marginVertical: 4,
     fontFamily: "RobotoLight",
   },
+  textJustify: {
+    textAlign: "justify",
+  },
   subcontainer: {
     flex: 1,
     alignItems: "center",
