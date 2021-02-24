@@ -119,26 +119,26 @@ export const SignUp = ({ navigation }) => {
               onChangeText={(text) => setState((prev) => ({ ...prev, firstName: text.trim() }))}
               onBlur={checkFirstName}
               value={state.firstName}
-              autoCapitalize="none"
-              style={main.input}
+              autoCapitalize="words"
+              style={authStyle.textInputAuth}
             />
-            {!isFirstName && <WarningText message="Ingresa tu correo" />}
+            {!isFirstName && <WarningText message="Ingresa tu nombre" />}
             <TextInput
               placeholder="Ingresa tu apellido"
               onChangeText={(text) => setState((prev) => ({ ...prev, lastName: text.trim() }))}
               onBlur={checkLastName}
               value={state.lastName}
-              autoCapitalize="none"
-              style={main.input}
+              autoCapitalize="words"
+              style={authStyle.textInputAuth}
             />
-            {!isLastName && <WarningText message="Ingresa tu correo" />}
+            {!isLastName && <WarningText message="Ingresa tu apellido" />}
             <TextInput
               placeholder="correo@ejemplo.cl"
               onChangeText={(text) => setState((prev) => ({ ...prev, email: text.trim() }))}
               onBlur={checkMail}
               value={state.email}
               autoCapitalize="none"
-              style={main.input}
+              style={authStyle.textInputAuth}
             />
             {!isMail && <WarningText message="Ingresa tu correo" />}
             <TextInput
@@ -148,7 +148,7 @@ export const SignUp = ({ navigation }) => {
               onBlur={checkPassword}
               value={state.password}
               autoCapitalize="none"
-              style={main.input}
+              style={authStyle.textInputAuth}
             />
             {!isPassword && <WarningText message="Ingresa una contraseña" />}
           </View>

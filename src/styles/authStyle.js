@@ -6,16 +6,17 @@ export const authStyle = StyleSheet.create({
     backgroundColor: colors.blue,
     paddingVertical: 10,
     paddingHorizontal: 30,
-    marginTop: 4,
     borderRadius: 4,
   },
   buttonText: {
     color: colors.white,
     textAlign: "center",
-    fontWeight: "bold",
+    fontFamily: "RobotoMedium",
+    fontSize: 16,
   },
   buttonView: {
-    paddingVertical: 12,
+    marginTop: 8,
+    width: "90%",
     flex: 0.1,
   },
   container: {
@@ -25,11 +26,13 @@ export const authStyle = StyleSheet.create({
     backgroundColor: colors.white,
   },
   form: {
-    backgroundColor: colors.white,
-    padding: 24,
-    flex: 0.6,
     alignItems: "center",
+    alignSelf: "center",
+    backgroundColor: colors.white,
+    flex: 0.6,
     justifyContent: "center",
+    padding: 24,
+    width: "80%",
   },
   formQuiz: {
     padding: 24,
@@ -46,14 +49,36 @@ export const authStyle = StyleSheet.create({
     flexDirection: "column",
     alignContent: "center",
   },
-  helpText: { fontSize: 16 },
+  helpText: {
+    fontSize: 16,
+  },
+  textInputAuth: {
+    borderColor: colors.blue,
+    borderRadius: 4,
+    borderWidth: 2,
+    fontFamily: "RobotoRegular",
+    includeFontPadding: true,
+    marginVertical: 10,
+    padding: 3,
+    width: 236,
+  },
+  textInputForm: {
+    borderColor: colors.gray,
+    borderWidth: 2,
+    borderRadius: 4,
+    marginVertical: 4,
+    marginLeft: 6,
+    fontFamily: "RobotoLight",
+  },
   link: {
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 12,
+    marginVertical: 10,
   },
   linkText: {
     color: colors.blue,
+    fontFamily: "RobotoRegular",
+    fontSize: 15,
   },
   logo: {
     width: 150,
@@ -92,7 +117,8 @@ export const authStyle = StyleSheet.create({
   title: {
     textAlign: "center",
     color: colors.black,
-    fontSize: 16,
+    fontSize: 22,
     marginVertical: 10,
+    fontFamily: "BitterRegular",
   },
 });

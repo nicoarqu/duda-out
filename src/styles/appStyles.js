@@ -58,6 +58,7 @@ export const main = StyleSheet.create({
     shadowOpacity: 0.18,
     shadowRadius: 1.0,
   },
+  fullWidth: { width: "100%" },
   input: {
     width: 250,
     borderColor: colors.blue,
@@ -70,6 +71,7 @@ export const main = StyleSheet.create({
     borderWidth: 2,
     borderRadius: 4,
     marginVertical: 4,
+    fontFamily: "RobotoLight",
   },
   subcontainer: {
     flex: 1,

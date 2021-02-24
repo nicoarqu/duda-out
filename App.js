@@ -5,9 +5,10 @@ import { Provider } from "react-redux";
 import { LogBox } from "react-native";
 import {
   useFonts,
-  Roboto_500Medium as RobotoMedium,
-  Roboto_400Regular as RobotoRegular,
   Roboto_300Light as RobotoLight,
+  Roboto_400Regular as RobotoRegular,
+  Roboto_500Medium as RobotoMedium,
+  Roboto_700Bold as RobotoBold,
 } from "@expo-google-fonts/roboto";
 import {
   Bitter_400Regular as BitterRegular,
@@ -21,6 +22,7 @@ LogBox.ignoreAllLogs(true);
 
 const App = () => {
   const [fontsLoaded] = useFonts({
+    RobotoBold,
     RobotoMedium,
     RobotoRegular,
     RobotoLight,
