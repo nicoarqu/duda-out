@@ -1,12 +1,12 @@
 import React from "react";
-import { View, Text, FlatList } from "react-native";
+import { ScrollView, Text, FlatList } from "react-native";
 import { ListItem } from "react-native-elements";
 import { Entypo, FontAwesome5 } from "@expo/vector-icons";
 import { colors, counselorStyle, main } from "../../styles";
 
 export const ChatList = ({ conversations, navigation }) => {
   return (
-    <View style={main.flexOne}>
+    <ScrollView style={main.flexOne}>
       <FlatList
         style={counselorStyle.chatList}
         data={conversations}
@@ -26,6 +26,6 @@ export const ChatList = ({ conversations, navigation }) => {
         )}
         ListEmptyComponent={<Text>No tienes conversaciones</Text>}
       />
-    </View>
+    </ScrollView>
   );
 };
