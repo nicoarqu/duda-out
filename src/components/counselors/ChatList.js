@@ -15,13 +15,11 @@ export const ChatList = ({ conversations, navigation }) => {
           <ListItem
             bottomDivider
             topDivider
-            onPress={() =>
-              navigation.navigate("Chat", { chatId: item.id, title: item.counselorName })
-            }
+            onPress={() => navigation.navigate("Chat", { chatId: item.id, title: item.otherName })}
           >
             <FontAwesome5 name="user-graduate" color={colors.blue} size={24} />
             <ListItem.Content>
-              <ListItem.Title>{item.counselorName}</ListItem.Title>
+              <ListItem.Title>{item.otherName}</ListItem.Title>
             </ListItem.Content>
             <Entypo name="chevron-right" color="gray" size={24} />
           </ListItem>

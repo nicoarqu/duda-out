@@ -1,6 +1,5 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import { useSelector, useDispatch } from "react-redux";
 import { LogIn, SignUp } from "../containers/auth";
 import { PersonalInfo, VARKTest } from "../containers/forms";
 import { MainTab } from "./MainTab";
@@ -25,7 +24,7 @@ const MainStack = () => {
         component={VARKTest}
         options={{ title: "Test de Habilidades", ...headerStyle.titleHeader }}
       />
-      <Stack.Screen name="MainTab" children={MainTab} />
+      <Stack.Screen name="MainTab" children={MainTab} options={headerStyle.hideHeader} />
     </Stack.Navigator>
   );
 };
