@@ -1,21 +1,16 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import { CounselorsMain, Chat, CounselorsInfo } from "../containers/counselors";
+import { ConversationsMain, Chat } from "../containers/counselors";
 import { headerStyle } from "../styles";
 
 const Stack = createStackNavigator();
 
-export const CounselorsStack = () => (
+export const ConversationStack = () => (
   <Stack.Navigator screenOptions={headerStyle.titleHeader}>
     <Stack.Screen
-      name="CounselorsMain"
-      component={CounselorsMain}
+      name="ConversationsMain"
+      component={ConversationsMain}
       options={{ title: "Mis conversaciones" }}
-    />
-    <Stack.Screen
-      name="CounselorsInfo"
-      component={CounselorsInfo}
-      options={{ title: "Consejeros" }}
     />
     <Stack.Screen
       name="Chat"

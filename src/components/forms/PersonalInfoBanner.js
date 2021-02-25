@@ -17,13 +17,10 @@ export const PersonalInfoBanner = ({ modalVisible, setModalVisible }) => {
           </Text>
           <Text style={authStyle.modalText}>
             Antes de iniciar, te pedimos que nos cuentes un poco más de ti para determinar la mejor
-            forma de ayudarte
+            forma de ayudarte.
           </Text>
-          <Pressable
-            style={[authStyle.button, authStyle.buttonClose]}
-            onPress={() => setModalVisible(!modalVisible)}
-          >
-            <Text style={authStyle.buttonText}>Continuar</Text>
+          <Pressable style={authStyle.button} onPress={() => setModalVisible(!modalVisible)}>
+            <Text style={authStyle.buttonText}>Ok</Text>
           </Pressable>
         </View>
       </View>

@@ -53,6 +53,7 @@ export const ProgramInfo = ({ route }) => {
         setRate={setRate}
         ratingId={ratingId}
         setRatingId={setRatingId}
+        uid={uid}
       />
       <View style={programStyles.descView}>
         <Text style={programStyles.infoText}>{program.desc}</Text>

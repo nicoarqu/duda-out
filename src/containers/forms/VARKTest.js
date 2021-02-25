@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { RadioButton, Checkbox } from "react-native-paper";
+import { RadioButton } from "react-native-paper";
 import { useSelector } from "react-redux";
 import { VARKQuestions } from "../../api/forms/constants";
 import { WarningText } from "../../components/forms/WarningText";
@@ -58,12 +58,11 @@ export const VARKTest = ({ navigation }) => {
       keyboardShouldPersistTaps="always"
     >
       <View style={[main.container, main.floatingBox]}>
-        <Text style={authStyle.title}>Test de Habilidades</Text>
         <View style={authStyle.formQuiz}>
           {VARKQuestions.map((q) => {
             return (
               <View style={authStyle.formControl} key={q.id}>
-                <Text>
+                <Text style={[authStyle.textLabel, main.textJustify]}>
                   {q.id}) {q.question}
                 </Text>
                 <RadioButton.Group
@@ -77,7 +76,7 @@ export const VARKTest = ({ navigation }) => {
                   {q.options.map((opt) => (
                     <View style={authStyle.radioButtonView} key={opt.id}>
                       <RadioButton value={opt.value} />
-                      <Text>{opt.text}</Text>
+                      <Text style={authStyle.textOption}>{opt.text}</Text>
                     </View>
                   ))}
                 </RadioButton.Group>

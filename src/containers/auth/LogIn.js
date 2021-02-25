@@ -93,7 +93,7 @@ export const LogIn = ({ navigation }) => {
               onBlur={checkMail}
               value={state.mail}
               autoCapitalize="none"
-              style={main.input}
+              style={authStyle.textInputAuth}
             />
             {!isMail && <WarningText message="Ingresa tu correo" />}
             <TextInput
@@ -103,7 +103,7 @@ export const LogIn = ({ navigation }) => {
               onBlur={checkPassword}
               value={state.password}
               autoCapitalize="none"
-              style={main.input}
+              style={authStyle.textInputAuth}
             />
             {!isPassword && <WarningText message="Ingresa una contraseña" />}
           </View>
@@ -114,7 +114,7 @@ export const LogIn = ({ navigation }) => {
           </View>
         </View>
         <View style={authStyle.link}>
-          <Text onPress={() => navigation.push("SignUp")} style={authStyle.linkText}>
+          <Text onPress={() => navigation.replace("SignUp")} style={authStyle.linkText}>
             ¿No tienes cuenta? Regístrate aquí
           </Text>
         </View>

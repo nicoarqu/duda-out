@@ -94,9 +94,8 @@ export const PersonalInfo = ({ navigation }) => {
       <PersonalInfoBanner modalVisible={modalVisible} setModalVisible={setModalVisible} />
       <View style={[main.container, main.floatingBox]}>
         <View style={authStyle.formQuiz}>
-          <Text style={authStyle.title}>Información personal</Text>
           <View style={authStyle.formControl}>
-            <Text>Ingresa tu universidad</Text>
+            <Text style={authStyle.textLabel}>Ingresa tu universidad</Text>
             <TextInput
               style={main.textInput}
               placeholder="UAI"
@@ -109,7 +108,7 @@ export const PersonalInfo = ({ navigation }) => {
             {universityError && <WarningText message="Ingresa tu universidad" />}
           </View>
           <View style={authStyle.formControl}>
-            <Text>¿Por qué elegiste esta universidad?</Text>
+            <Text style={authStyle.textLabel}>¿Por qué elegiste esta universidad?</Text>
             <TextInput
               style={main.textInput}
               multiline
@@ -126,7 +125,7 @@ export const PersonalInfo = ({ navigation }) => {
             {universityChoiceError && <WarningText message="Ingresa tus motivos" />}
           </View>
           <View style={authStyle.formControl}>
-            <Text>¿Qué carrera estudias?</Text>
+            <Text style={authStyle.textLabel}>¿Qué carrera estudias?</Text>
             <TextInput
               style={main.textInput}
               placeholder="Tu carrera"
@@ -137,7 +136,7 @@ export const PersonalInfo = ({ navigation }) => {
             {careerError && <WarningText message="Ingresa tu carrera" />}
           </View>
           <View style={authStyle.formControl}>
-            <Text>¿Vives sólo o con tus padres?</Text>
+            <Text style={authStyle.textLabel}>¿Vives sólo o con tus padres?</Text>
             <RadioButton.Group
               onValueChange={(newValue) => {
                 setLivingWith(newValue);
@@ -147,17 +146,17 @@ export const PersonalInfo = ({ navigation }) => {
             >
               <View style={authStyle.radioButtonView}>
                 <RadioButton value="Sólo" />
-                <Text>Sólo</Text>
+                <Text style={authStyle.textOption}>Sólo</Text>
               </View>
               <View style={authStyle.radioButtonView}>
                 <RadioButton value="Con los padres" />
-                <Text>Con tus padres</Text>
+                <Text style={authStyle.textOption}>Con tus padres</Text>
               </View>
             </RadioButton.Group>
             {livingWithError && <WarningText message="Selecciona una opción" />}
           </View>
           <View style={authStyle.formControl}>
-            <Text>¿Tienes algún trabajo recurrente?</Text>
+            <Text style={authStyle.textLabel}>¿Tienes algún trabajo recurrente?</Text>
             <RadioButton.Group
               onValueChange={(newValue) => {
                 setIsWorking(newValue);
@@ -167,17 +166,19 @@ export const PersonalInfo = ({ navigation }) => {
             >
               <View style={authStyle.radioButtonView}>
                 <RadioButton value="Sí" />
-                <Text>Sí</Text>
+                <Text style={authStyle.textOption}>Sí</Text>
               </View>
               <View style={authStyle.radioButtonView}>
                 <RadioButton value="No" />
-                <Text>No</Text>
+                <Text style={authStyle.textOption}>No</Text>
               </View>
             </RadioButton.Group>
             {isWorkingError && <WarningText message="Selecciona una opción" />}
           </View>
           <View style={authStyle.formControl}>
-            <Text>¿Tienes ayuda externa que te ayude a pagar tus estudios?</Text>
+            <Text style={authStyle.textLabel}>
+              ¿Tienes ayuda externa que te ayude a pagar tus estudios?
+            </Text>
             <RadioButton.Group
               onValueChange={(newValue) => {
                 setGrant(newValue);
@@ -187,25 +188,27 @@ export const PersonalInfo = ({ navigation }) => {
             >
               <View style={authStyle.radioButtonView}>
                 <RadioButton value="CAE" />
-                <Text>CAE</Text>
+                <Text style={authStyle.textOption}>CAE</Text>
               </View>
               <View style={authStyle.radioButtonView}>
                 <RadioButton value="Beca" />
-                <Text>Beca</Text>
+                <Text style={authStyle.textOption}>Beca</Text>
               </View>
               <View style={authStyle.radioButtonView}>
                 <RadioButton value="Gratuidad" />
-                <Text>Gratuidad</Text>
+                <Text style={authStyle.textOption}>Gratuidad</Text>
               </View>
               <View style={authStyle.radioButtonView}>
                 <RadioButton value="Otra" />
-                <Text>Otra</Text>
+                <Text style={authStyle.textOption}>Otra</Text>
               </View>
             </RadioButton.Group>
             {grantError && <WarningText message="Selecciona una opción" />}
           </View>
           <View style={authStyle.formControl}>
-            <Text>¿Con cuántos días de anticipación te gustaría preparar tus evaluaciones?</Text>
+            <Text style={authStyle.textLabel}>
+              ¿Con cuántos días de anticipación te gustaría preparar tus evaluaciones?
+            </Text>
             <RadioButton.Group
               onValueChange={(newValue) => {
                 setAnticipationDays(newValue);
@@ -215,21 +218,23 @@ export const PersonalInfo = ({ navigation }) => {
             >
               <View style={authStyle.radioButtonView}>
                 <RadioButton value="De 1-3 días de anticipación" />
-                <Text>De 1-3 días de anticipación</Text>
+                <Text style={authStyle.textOption}>De 1-3 días de anticipación</Text>
               </View>
               <View style={authStyle.radioButtonView}>
                 <RadioButton value="De 3-5 días de anticipación" />
-                <Text>De 3-5 días de anticipación</Text>
+                <Text style={authStyle.textOption}>De 3-5 días de anticipación</Text>
               </View>
               <View style={authStyle.radioButtonView}>
                 <RadioButton value="5 o más días de anticipación" />
-                <Text>5 o más días de anticipación</Text>
+                <Text style={authStyle.textOption}>5 o más días de anticipación</Text>
               </View>
             </RadioButton.Group>
             {anticipationDaysError && <WarningText message="Selecciona una opción" />}
           </View>
           <View style={authStyle.formControl}>
-            <Text>¿Cual horario es el que más te acomoda estudiar?</Text>
+            <Text style={authStyle.textLabel}>
+              ¿Cual horario es el que más te acomoda estudiar?
+            </Text>
             <RadioButton.Group
               onValueChange={(newValue) => {
                 setStudyTime(newValue);
@@ -239,25 +244,25 @@ export const PersonalInfo = ({ navigation }) => {
             >
               <View style={authStyle.radioButtonView}>
                 <RadioButton value="9:00 - 12:00" />
-                <Text>9:00 - 12:00</Text>
+                <Text style={authStyle.textOption}>9:00 - 12:00</Text>
               </View>
               <View style={authStyle.radioButtonView}>
                 <RadioButton value="14:00 - 17:00" />
-                <Text>14:00 - 17:00</Text>
+                <Text style={authStyle.textOption}>14:00 - 17:00</Text>
               </View>
               <View style={authStyle.radioButtonView}>
                 <RadioButton value="18:00 - 21:00" />
-                <Text>18:00 - 21:00</Text>
+                <Text style={authStyle.textOption}>18:00 - 21:00</Text>
               </View>
               <View style={authStyle.radioButtonView}>
                 <RadioButton value="22:00 - 00:00" />
-                <Text>22:00 - 00:00</Text>
+                <Text style={authStyle.textOption}>22:00 - 00:00</Text>
               </View>
             </RadioButton.Group>
             {studyTimeError && <WarningText message="Selecciona una opción" />}
           </View>
           <View style={authStyle.formControl}>
-            <Text>¿Prefieres tener?</Text>
+            <Text style={authStyle.textLabel}>¿Prefieres tener?</Text>
             <RadioButton.Group
               onValueChange={(newValue) => {
                 setStudyOption(newValue);
@@ -267,11 +272,11 @@ export const PersonalInfo = ({ navigation }) => {
             >
               <View style={authStyle.radioButtonView}>
                 <RadioButton value="Horas seguidas de estudio" />
-                <Text>Horas seguidas de estudio</Text>
+                <Text style={authStyle.textOption}>Horas seguidas de estudio</Text>
               </View>
               <View style={authStyle.radioButtonView}>
                 <RadioButton value="Tiempos cortos de estudio" />
-                <Text>Tiempos cortos de estudio</Text>
+                <Text style={authStyle.textOption}>Tiempos cortos de estudio</Text>
               </View>
             </RadioButton.Group>
             {studyOptionError && <WarningText message="Selecciona una opción" />}

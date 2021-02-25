@@ -1,9 +1,5 @@
 import { StyleSheet } from "react-native";
 
-export const stackHeader = {
-  headerShown: false,
-};
-
 export const colors = {
   gray: "#808080",
   blue: "#1673FF",
@@ -15,12 +11,24 @@ export const colors = {
   warnRed: "#B33A3A",
 };
 
-export const titleHeader = {
-  headerStyle: {
-    backgroundColor: colors.blue,
+export const headerStyle = {
+  barStyle: {
+    backgroundColor: colors.lightBlue,
   },
-  headerTintColor: colors.white,
-  headerTitleAlign: "center",
+  hideHeader: {
+    headerShown: false,
+  },
+  titleHeader: {
+    headerStyle: {
+      backgroundColor: colors.blue,
+    },
+    headerTintColor: colors.white,
+    headerTitleAlign: "center",
+    headerTitleStyle: {
+      fontFamily: "BitterRegular",
+      fontSize: 24,
+    },
+  },
 };
 
 export const main = StyleSheet.create({
@@ -43,21 +51,22 @@ export const main = StyleSheet.create({
   container: {
     flex: 1,
     margin: 20,
-    backgroundColor: colors.white,
   },
   flexOne: { flex: 1 },
   flexGrowOne: { flexGrow: 1 },
   floatingBox: {
-    padding: 12,
+    backgroundColor: colors.white,
     borderRadius: 4,
     borderColor: colors.gray,
     borderWidth: 1,
     elevation: 1,
+    padding: 12,
     shadowColor: colors.black,
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.18,
     shadowRadius: 1.0,
   },
+  fullWidth: { width: "100%" },
   input: {
     width: 250,
     borderColor: colors.blue,
@@ -70,6 +79,10 @@ export const main = StyleSheet.create({
     borderWidth: 2,
     borderRadius: 4,
     marginVertical: 4,
+    fontFamily: "RobotoLight",
+  },
+  textJustify: {
+    textAlign: "justify",
   },
   subcontainer: {
     flex: 1,
