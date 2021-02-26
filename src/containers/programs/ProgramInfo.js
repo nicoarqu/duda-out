@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { View, Text } from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
 import { getItemData } from "../../api/forms/getItemData";
 import { StarRating, Title } from "../../components/programs";
 import { db } from "../../config/Firebase";
@@ -13,6 +14,7 @@ export const ProgramInfo = ({ route }) => {
   const uid = useSelector((state) => state.auth.currentUserId);
 
   useEffect(() => {
+    getItemData("programs", program.id).then((res) => setProgram(res));
     db.collection("program-ratings")
       .where("userId", "==", uid)
       .where("programId", "==", program.id)
@@ -44,20 +46,23 @@ export const ProgramInfo = ({ route }) => {
   };
 
   return (
-    <View style={[main.container, main.floatingBox]}>
-      <Title program={program} />
-      <StarRating
-        programId={program.id}
-        updateProgram={(rating) => updateProgram(rating)}
-        rate={rate}
-        setRate={setRate}
-        ratingId={ratingId}
-        setRatingId={setRatingId}
-        uid={uid}
-      />
-      <View style={programStyles.descView}>
-        <Text style={programStyles.infoText}>{program.desc}</Text>
+    <ScrollView style={[main.container, main.floatingBox]}>
+      <View style={programStyles.programView}>
+        <Title program={program} />
+        <StarRating
+          programId={program.id}
+          updateProgram={(rating) => updateProgram(rating)}
+          rate={rate}
+          setRate={setRate}
+          ratingId={ratingId}
+          setRatingId={setRatingId}
+          uid={uid}
+        />
+        <View style={programStyles.descView}>
+          {program.description &&
+            program.description.map((des) => <Text style={programStyles.infoText}>{des}</Text>)}
+        </View>
       </View>
-    </View>
+    </ScrollView>
   );
 };

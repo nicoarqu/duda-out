@@ -3,6 +3,7 @@ import { colors } from "./appStyles";
 
 export const programStyles = StyleSheet.create({
   button: {
+    backgroundColor: colors.white,
     borderWidth: 2,
     borderRadius: 4,
     borderColor: colors.blue,
@@ -22,8 +23,8 @@ export const programStyles = StyleSheet.create({
   },
   descView: {
     flex: 2,
-    justifyContent: "flex-start",
-    marginTop: 14,
+    justifyContent: "center",
+    marginTop: 16,
   },
   infoView: {
     marginTop: 20,
@@ -31,16 +32,18 @@ export const programStyles = StyleSheet.create({
     paddingHorizontal: 8,
   },
   infoText: {
-    textAlign: "justify",
+    fontFamily: "RobotoRegular",
     fontSize: 16,
     paddingVertical: 8,
     paddingHorizontal: 16,
+    textAlign: "justify",
   },
   infoButton: {
     textAlign: "center",
     fontSize: 16,
     paddingVertical: 2,
   },
+  programView: { padding: 12 },
   titleText: {
     textAlign: "center",
     fontSize: 20,
