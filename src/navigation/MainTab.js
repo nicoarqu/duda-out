@@ -1,13 +1,16 @@
 import React from "react";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import { useSelector } from "react-redux";
-import { MaterialIcons } from "@expo/vector-icons";
+import { MaterialIcons, Ionicons } from "@expo/vector-icons";
+import { headerStyle, colors } from "../styles";
+// Student
 // import { CalendarStack } from "./CalendarStack";
 import { CounselorsStack } from "./CounselorsStack";
-import { ConversationStack } from "./ConversationStack";
 import { ProgramsStack } from "./ProgramsStack";
 import { ProfileStack } from "./ProfileStack";
-import { headerStyle, colors } from "../styles";
+// Counselors
+import { StatsStack } from "./StatsStack";
+import { ConversationStack } from "./ConversationStack";
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -34,11 +37,11 @@ export const MainTab = () => {
           }}
         />
         <Tab.Screen
-          name="Programas"
-          children={ProgramsStack}
+          name="Estadísticas"
+          children={StatsStack}
           options={{
-            tabBarLabel: "Programas",
-            tabBarIcon: ({ color }) => <MaterialIcons name="school" color={color} size={26} />,
+            tabBarLabel: "Estadísticas",
+            tabBarIcon: ({ color }) => <Ionicons name="stats-chart" color={color} size={26} />,
           }}
         />
         <Tab.Screen
