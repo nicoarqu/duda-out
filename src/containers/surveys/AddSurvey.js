@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import { View, Text, ScrollView, TextInput } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { main, surveyStyle } from "../../styles";
+import { db } from "../../config/Firebase";
 
-export const AddSurvey = () => {
+export const AddSurvey = ({ navigation }) => {
   const [questions, setQuestions] = useState([
     {
       idx: 0,
@@ -15,15 +16,31 @@ export const AddSurvey = () => {
   const [state, setState] = useState({
     surveyTitle: "",
   });
-  console.log(questions);
+
+  const saveSurvey = async () => {
+    const newSurvey = await db.collection("surveys").add({
+      title: state.surveyTitle,
+    });
+    Promise.all(
+      questions.map((q) => {
+        return db
+          .collection("surveys")
+          .doc(newSurvey.id)
+          .collection("questions")
+          .add({ ...q, voteCount: 0, avgVote: 0 });
+      })
+    );
+    navigation.pop();
+  };
+
   return (
-    <ScrollView style={main.container}>
+    <View style={main.container}>
       <TextInput
         placeholder="Título de encuesta"
         value={state.surveyTitle}
         onChangeText={(text) => setState((prev) => ({ ...prev, surveyTitle: text }))}
       />
-      <View style={[main.floatingBox, surveyStyle.form]}>
+      <ScrollView style={[main.floatingBox, surveyStyle.form]}>
         {questions.map((q) => {
           const { idx } = q;
           return (
@@ -72,7 +89,12 @@ export const AddSurvey = () => {
             <Text style={main.buttonText}>Agregar pregunta</Text>
           </TouchableOpacity>
         </View>
+      </ScrollView>
+      <View style={main.buttonView}>
+        <TouchableOpacity onPress={() => saveSurvey()} style={main.button}>
+          <Text style={main.buttonText}>Enviar</Text>
+        </TouchableOpacity>
       </View>
-    </ScrollView>
+    </View>
   );
 };
