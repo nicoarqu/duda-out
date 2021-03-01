@@ -6,7 +6,7 @@ import { Entypo, Ionicons } from "@expo/vector-icons";
 import { db } from "../../config/Firebase";
 import { counselorStyle, main, colors } from "../../styles";
 
-export const ProgramStats = ({ navigation }) => {
+export const ProgramStats = () => {
   const [programs, setPrograms] = useState([]);
   useEffect(() => {
     db.collection("programs")
@@ -16,7 +16,6 @@ export const ProgramStats = ({ navigation }) => {
         const data = snapshot.docs.map((res) => {
           return { ...res.data(), id: res.id };
         });
-        console.log(data);
         setPrograms(data);
       })
       .catch((error) => alert(error));

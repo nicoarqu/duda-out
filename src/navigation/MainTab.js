@@ -1,7 +1,7 @@
 import React from "react";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import { useSelector } from "react-redux";
-import { MaterialIcons, Ionicons } from "@expo/vector-icons";
+import { MaterialIcons, Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { headerStyle, colors } from "../styles";
 // Student
 // import { CalendarStack } from "./CalendarStack";
@@ -11,6 +11,7 @@ import { ProfileStack } from "./ProfileStack";
 // Counselors
 import { StatsStack } from "./StatsStack";
 import { ConversationStack } from "./ConversationStack";
+import { SurveyCounselorStack } from "./SurveyCounselorStack";
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -26,6 +27,16 @@ export const MainTab = () => {
         inactiveColor={colors.gray}
         barStyle={headerStyle.barStyle}
       >
+        <Tab.Screen
+          name="Encuestas"
+          children={SurveyCounselorStack}
+          options={{
+            tabBarLabel: "Encuestas",
+            tabBarIcon: ({ color }) => (
+              <MaterialCommunityIcons name="calendar-question" color={color} size={26} />
+            ),
+          }}
+        />
         <Tab.Screen
           name="Conversaciones"
           children={ConversationStack}
