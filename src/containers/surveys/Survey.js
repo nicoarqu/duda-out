@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { View, Text } from "react-native";
+import { Rating } from "react-native-ratings";
 import { getItemData } from "../../api/forms/getItemData";
 import { StarRating, Title } from "../../components/programs";
 import { db } from "../../config/Firebase";
-import { main, programStyles } from "../../styles";
+import { main, surveyStyle } from "../../styles";
 
 export const Survey = ({ route }) => {
-  const [program, setProgram] = useState(route.params.program);
+  const [survey, setSurvey] = useState(route.params.survey);
   const [rate, setRate] = useState(0);
   const [ratingId, setRatingId] = useState("");
   const uid = useSelector((state) => state.auth.currentUserId);
@@ -15,7 +16,7 @@ export const Survey = ({ route }) => {
   useEffect(() => {
     db.collection("program-ratings")
       .where("userId", "==", uid)
-      .where("programId", "==", program.id)
+      .where("programId", "==", survey.id)
       .limit(1)
       .get()
       .then((querySnapshot) => {
@@ -28,35 +29,37 @@ export const Survey = ({ route }) => {
       });
   }, []);
 
-  const updateProgram = (rating) => {
+  const updateSurvey = (rating) => {
     const oldRate = rate;
     // get average ratings and update program in db and state
-    getItemData("programs", program.id).then((pg) => {
+    getItemData("programs", survey.id).then((pg) => {
       const count = oldRate ? 0 : 1;
       const newNumRatings = pg.numRatings + count;
       const oldRatingTotal = pg.rating * pg.numRatings;
       const newRating = (oldRatingTotal - oldRate + rating) / newNumRatings;
-      db.collection("programs")
-        .doc(program.id)
+      db.collection("surveys")
+        .doc(survey.id)
         .update({ rating: newRating, numRatings: newNumRatings })
-        .then(setProgram({ ...pg, rating: newRating }));
+        .then(setSurvey({ ...pg, rating: newRating }));
     });
   };
 
   return (
     <View style={[main.container, main.floatingBox]}>
-      <Title program={program} />
+      <Title survey={survey} />
       <StarRating
-        programId={program.id}
-        updateProgram={(rating) => updateProgram(rating)}
+        surveyId={survey.id}
+        updatesurvey={(rating) => updateSurvey(rating)}
         rate={rate}
         setRate={setRate}
         ratingId={ratingId}
         setRatingId={setRatingId}
         uid={uid}
       />
-      <View style={programStyles.descView}>
-        <Text style={programStyles.infoText}>{program.desc}</Text>
+      <Rating type="heart" ratingCount={5} imageSize={50} showRating={false} />
+      <Rating type="rocket" ratingCount={5} imageSize={50} showRating />
+      <View style={surveyStyle.descView}>
+        <Text style={surveyStyle.infoText}>{survey.desc}</Text>
       </View>
     </View>
   );

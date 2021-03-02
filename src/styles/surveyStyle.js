@@ -2,6 +2,22 @@ import { StyleSheet } from "react-native";
 import { colors } from "./appStyles";
 
 export const surveyStyle = StyleSheet.create({
+  abilityContent: {
+    flex: 1,
+    paddingBottom: 30,
+  },
+  abilityLabel: {
+    textAlign: "justify",
+    color: colors.darkBlue,
+    fontSize: 18,
+    marginVertical: 4,
+    fontFamily: "BitterRegular",
+  },
+  abilityView: {
+    flex: 1,
+    maxWidth: 340,
+    padding: 20,
+  },
   button: {
     backgroundColor: colors.blue,
     paddingVertical: 10,
@@ -77,37 +93,6 @@ export const surveyStyle = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginVertical: 10,
-  },
-  linkText: {
-    color: colors.blue,
-    fontFamily: "RobotoRegular",
-    fontSize: 15,
-  },
-  logo: {
-    width: 150,
-    height: 100,
-    resizeMode: "contain",
-  },
-  modalText: {
-    fontFamily: "BitterRegular",
-    fontSize: 15,
-    marginBottom: 16,
-    textAlign: "justify",
-  },
-  modalView: {
-    margin: 24,
-    backgroundColor: colors.modalBackground,
-    borderRadius: 12,
-    padding: 32,
-    alignItems: "center",
-    shadowColor: colors.black,
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
   },
   radioButtonView: {
     flexDirection: "row",

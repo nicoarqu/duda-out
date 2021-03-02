@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-
 import { View, Text, TouchableOpacity } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { getItemData } from "../../api/forms/getItemData";
@@ -12,12 +11,15 @@ export const Profile = ({ navigation }) => {
   const uid = useSelector((state) => state.auth.currentUserId);
   const dispatch = useDispatch();
   const [user, setUser] = useState({ username: "", VARK: {} });
+  const [state, setState] = useState({ loading: true, varkDesc: {} });
 
   useEffect(() => {
     const fetchData = async () => {
       const userData = await getItemData("users", uid);
       const { firstName, VARKresults } = userData;
       setUser({ firstName, VARK: VARKresults });
+      const varkDesc = await getItemData("vark-descriptions", "results");
+      setState({ loading: false, varkDesc });
     };
     fetchData();
   }, []);
@@ -35,7 +37,7 @@ export const Profile = ({ navigation }) => {
     <View style={main.container}>
       <View style={main.subcontainer}>
         <Text>Hola {user.firstName} !</Text>
-        <VARKBox user={user} />
+        <VARKBox user={user} state={state} />
         <View style={main.buttonView}>
           <TouchableOpacity onPress={handleLogout} style={main.button}>
             <Text style={main.buttonText}>Cerrar sesión</Text>

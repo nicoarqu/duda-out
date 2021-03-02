@@ -1,7 +1,7 @@
 import React from "react";
 import { ScrollView, Text, FlatList } from "react-native";
 import { ListItem } from "react-native-elements";
-import { Entypo, FontAwesome5 } from "@expo/vector-icons";
+import { Entypo, AntDesign } from "@expo/vector-icons";
 import { colors, counselorStyle, main } from "../../styles";
 
 export const SurveysList = ({ surveys, navigation }) => {
@@ -13,9 +13,9 @@ export const SurveysList = ({ surveys, navigation }) => {
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <ListItem bottomDivider topDivider>
-            <FontAwesome5 name="user-graduate" color={colors.blue} size={24} />
+            <AntDesign name="form" size={24} color={colors.blue} />
             <ListItem.Content>
-              <ListItem.Title>{item.score}</ListItem.Title>
+              <ListItem.Title>{item.type}</ListItem.Title>
               <ListItem.Subtitle>{item.score}</ListItem.Subtitle>
             </ListItem.Content>
             <Entypo name="chevron-right" color="gray" size={24} />

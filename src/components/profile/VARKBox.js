@@ -1,16 +1,23 @@
 import React from "react";
 import { Text, View } from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
 import { ActivityIndicator } from "react-native-paper";
-import { main } from "../../styles";
+import { main, surveyStyle } from "../../styles";
 
-export const VARKBox = ({ user }) => {
+export const VARKBox = ({ user, state }) => {
   const abilityRef = {
-    aural: "Aural",
-    kinesthetic: "Kinestética",
-    readWrite: "Escrita",
-    visual: "Visual",
+    aural: "auditivo",
+    kinesthetic: "kinestesica",
+    readWrite: "lectoEscritura",
+    visual: "visual",
   };
-  if (Object.keys(user.VARK).length === 0) {
+  const abilityText = {
+    aural: "Perfil Auditivo",
+    kinesthetic: "Perfil Kinestésico",
+    readWrite: "Perfil Lectura y escritura",
+    visual: "Perfil Visual",
+  };
+  if (state.loading) {
     return (
       <View style={main.floatingBox}>
         <ActivityIndicator />
@@ -19,16 +26,24 @@ export const VARKBox = ({ user }) => {
     );
   }
   return (
-    <View style={main.floatingBox}>
-      <Text>Tus resultados son:</Text>
-      {Object.keys(user.VARK)
-        .sort((a, b) => user.VARK[b] - user.VARK[a])
-        .map((ability) => (
-          <Text key={ability}>
-            {abilityRef[ability]} : {user.VARK[ability]} %
-          </Text>
-        ))}
-    </View>
+    <ScrollView style={[main.floatingBox, surveyStyle.abilityView]}>
+      <View style={surveyStyle.abilityContent}>
+        <Text>Tus resultados son:</Text>
+        {Object.keys(user.VARK)
+          .sort((a, b) => user.VARK[b] - user.VARK[a])
+          .map((ability, index) => (
+            <View key={ability}>
+              <Text style={surveyStyle.abilityLabel}>
+                {abilityText[ability]} : {user.VARK[ability]} %
+              </Text>
+              {(index === 0 || index === 1) &&
+                state.varkDesc[abilityRef[ability]].map((desc, idx) => (
+                  <Text key={idx}>{desc}</Text>
+                ))}
+            </View>
+          ))}
+      </View>
+    </ScrollView>
   );
 };
 
