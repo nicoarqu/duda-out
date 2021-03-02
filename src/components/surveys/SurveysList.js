@@ -15,8 +15,7 @@ export const SurveysList = ({ surveys, navigation }) => {
           <ListItem bottomDivider topDivider>
             <AntDesign name="form" size={24} color={colors.blue} />
             <ListItem.Content>
-              <ListItem.Title>{item.type}</ListItem.Title>
-              <ListItem.Subtitle>{item.score}</ListItem.Subtitle>
+              <ListItem.Title>{item.title}</ListItem.Title>
             </ListItem.Content>
             <Entypo name="chevron-right" color="gray" size={24} />
           </ListItem>
