@@ -85,6 +85,7 @@ export const main = StyleSheet.create({
   textJustify: {
     textAlign: "justify",
   },
+  pieChart: { marginTop: "33%" },
   subcontainer: {
     flex: 1,
     alignItems: "center",
