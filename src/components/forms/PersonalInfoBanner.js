@@ -1,8 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, Modal, Pressable } from "react-native";
+import { getItemData } from "../../api/forms/getItemData";
 import { authStyle, main } from "../../styles";
 
 export const PersonalInfoBanner = ({ modalVisible, setModalVisible }) => {
+  const [info, setInfo] = useState({ loading: true, modal: [] });
+
+  useEffect(() => {
+    async function fetchData() {
+      const introDesc = await getItemData("app-text", "intro");
+      setInfo({ loading: false, modal: introDesc.modal });
+      setModalVisible(true);
+    }
+    fetchData();
+  }, []);
+
   return (
     <Modal
       animationType="slide"
@@ -12,13 +24,11 @@ export const PersonalInfoBanner = ({ modalVisible, setModalVisible }) => {
     >
       <View style={main.subcontainer}>
         <View style={authStyle.modalView}>
-          <Text style={authStyle.modalText}>
-            Hola! Bienvenido/a a DudaOut, una app para que organices tu estudio.
-          </Text>
-          <Text style={authStyle.modalText}>
-            Antes de iniciar, te pedimos que nos cuentes un poco más de ti para determinar la mejor
-            forma de ayudarte.
-          </Text>
+          {info.modal.map((txt, idx) => (
+            <Text key={idx} style={authStyle.modalText}>
+              {txt}
+            </Text>
+          ))}
           <Pressable style={authStyle.button} onPress={() => setModalVisible(!modalVisible)}>
             <Text style={authStyle.buttonText}>Ok</Text>
           </Pressable>

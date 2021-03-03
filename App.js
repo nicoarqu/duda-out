@@ -18,6 +18,7 @@ import { ActivityIndicator } from "react-native-paper";
 import store from "./src/redux/store";
 import MainStack from "./src/navigation";
 
+LogBox.ignoreLogs(["Setting a timer"]);
 LogBox.ignoreAllLogs(true);
 
 const App = () => {

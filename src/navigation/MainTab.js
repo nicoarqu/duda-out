@@ -1,13 +1,18 @@
 import React from "react";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import { useSelector } from "react-redux";
-import { MaterialIcons } from "@expo/vector-icons";
+import { MaterialIcons, Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
+import { headerStyle, colors } from "../styles";
+import { ProfileStack } from "./ProfileStack";
+// Student
 // import { CalendarStack } from "./CalendarStack";
 import { CounselorsStack } from "./CounselorsStack";
-import { ConversationStack } from "./ConversationStack";
 import { ProgramsStack } from "./ProgramsStack";
-import { ProfileStack } from "./ProfileStack";
-import { headerStyle, colors } from "../styles";
+import { SurveyStack } from "./SurveyStack";
+// Counselors
+import { StatsStack } from "./StatsStack";
+import { ConversationStack } from "./ConversationStack";
+import { SurveyCounselorStack } from "./SurveyCounselorStack";
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -24,6 +29,16 @@ export const MainTab = () => {
         barStyle={headerStyle.barStyle}
       >
         <Tab.Screen
+          name="Encuestas"
+          children={SurveyCounselorStack}
+          options={{
+            tabBarLabel: "Encuestas",
+            tabBarIcon: ({ color }) => (
+              <MaterialCommunityIcons name="calendar-question" color={color} size={26} />
+            ),
+          }}
+        />
+        <Tab.Screen
           name="Conversaciones"
           children={ConversationStack}
           options={{
@@ -34,11 +49,11 @@ export const MainTab = () => {
           }}
         />
         <Tab.Screen
-          name="Programas"
-          children={ProgramsStack}
+          name="Estadísticas"
+          children={StatsStack}
           options={{
-            tabBarLabel: "Programas",
-            tabBarIcon: ({ color }) => <MaterialIcons name="school" color={color} size={26} />,
+            tabBarLabel: "Estadísticas",
+            tabBarIcon: ({ color }) => <Ionicons name="stats-chart" color={color} size={26} />,
           }}
         />
         <Tab.Screen
@@ -62,6 +77,16 @@ export const MainTab = () => {
       inactiveColor={colors.gray}
       barStyle={headerStyle.barStyle}
     >
+      <Tab.Screen
+        name="Encuestas"
+        children={SurveyStack}
+        options={{
+          tabBarLabel: "Encuestas",
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="calendar-question" color={color} size={26} />
+          ),
+        }}
+      />
       <Tab.Screen
         name="Consejeros"
         children={CounselorsStack}

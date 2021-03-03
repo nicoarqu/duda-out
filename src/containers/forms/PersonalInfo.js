@@ -30,7 +30,7 @@ export const PersonalInfo = ({ navigation }) => {
   const [studyOptionError, setStudyOptionError] = useState(false);
 
   const uid = useSelector((state) => state.auth.currentUserId);
-  const [modalVisible, setModalVisible] = useState(true);
+  const [modalVisible, setModalVisible] = useState(false);
 
   const checkForm = () => {
     if (!university.trim()) setUniversityError(true);
