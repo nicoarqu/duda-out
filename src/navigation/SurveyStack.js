@@ -12,6 +12,10 @@ export const SurveyStack = () => (
       component={PendingSurveys}
       options={{ title: "Encuestas a responder" }}
     />
-    <Stack.Screen name="Survey" component={Survey} options={{ title: "Encuesta" }} />
+    <Stack.Screen
+      name="Survey"
+      component={Survey}
+      options={({ route }) => ({ title: route.params.title })}
+    />
   </Stack.Navigator>
 );

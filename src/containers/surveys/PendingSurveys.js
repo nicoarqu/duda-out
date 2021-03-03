@@ -20,7 +20,7 @@ export const PendingSurveys = ({ navigation }) => {
         .get();
       if (!querySnapshot.empty) {
         const respondedIds = querySnapshot.docs.map((surv) => surv.data().surveyId);
-        const pending = allSurveys.filter((surv) => respondedIds.includes(surv.id));
+        const pending = allSurveys.filter((surv) => !respondedIds.includes(surv.id));
         setSurveys(pending);
       } else setSurveys(allSurveys);
     }

@@ -27,7 +27,8 @@ export const AddSurvey = ({ navigation }) => {
           .collection("surveys")
           .doc(newSurvey.id)
           .collection("questions")
-          .add({ ...q, voteCount: 0, avgVote: 0 });
+          .doc(q.idx.toString())
+          .set({ ...q, voteCount: 0, avgVote: 0, maxScore: Number(q.maxScore) });
       })
     );
     navigation.pop();

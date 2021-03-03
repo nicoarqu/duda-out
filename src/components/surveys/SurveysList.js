@@ -12,7 +12,11 @@ export const SurveysList = ({ surveys, navigation }) => {
         data={surveys}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <ListItem bottomDivider topDivider>
+          <ListItem
+            bottomDivider
+            topDivider
+            onPress={() => navigation.navigate("Survey", { surveyId: item.id, title: item.title })}
+          >
             <AntDesign name="form" size={24} color={colors.blue} />
             <ListItem.Content>
               <ListItem.Title>{item.title}</ListItem.Title>
