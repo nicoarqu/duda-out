@@ -118,6 +118,12 @@ export const surveyStyle = StyleSheet.create({
     justifyContent: "center",
     paddingVertical: 10,
   },
+  surveyInfoData: {
+    alignContent: "center",
+    alignSelf: "center",
+    flexDirection: "row",
+    marginBottom: 6,
+  },
   title: {
     textAlign: "center",
     color: colors.black,

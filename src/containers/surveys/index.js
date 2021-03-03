@@ -4,3 +4,4 @@ export { PendingSurveys } from "./PendingSurveys";
 // Counselor
 export { AddSurvey } from "./AddSurvey";
 export { SurveyMain } from "./SurveyMain";
+export { SurveyInfo } from "./SurveyInfo";

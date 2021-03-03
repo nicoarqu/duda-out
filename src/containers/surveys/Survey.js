@@ -50,7 +50,7 @@ export const Survey = ({ route, navigation }) => {
         .get();
       const { avgVote, voteCount } = questionRef.data();
       const newCount = voteCount + 1;
-      const newAvg = (avgVote * voteCount + ans.score) / newCount;
+      const newAvg = (avgVote * voteCount + Number(ans.score)) / newCount;
       await db
         .collection("surveys")
         .doc(surveyId)
