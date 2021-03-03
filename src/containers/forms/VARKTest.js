@@ -29,7 +29,7 @@ export const VARKTest = ({ navigation }) => {
     return res;
   };
 
-  const checkTest = () => {
+  const checkTest = async () => {
     if (isAnswered()) {
       Object.keys(options).forEach((key) => {
         count[options[key]] += 1;
@@ -43,11 +43,17 @@ export const VARKTest = ({ navigation }) => {
         readWrite: scores.r,
         kinesthetic: scores.k,
       };
-      db.collection("users")
-        .doc(uid)
-        .update({ VARKresults, hasVARKTest: true })
-        .then(navigation.replace("MainTab"))
-        .catch((error) => alert(error));
+      await db.collection("users").doc(uid).update({ VARKresults, hasVARKTest: true });
+      const highestAbility = Object.keys(VARKresults).sort(
+        (a, b) => VARKresults[b] - VARKresults[a]
+      )[0];
+      const highestRef = await db.collection("vark").doc("count").get();
+      const prevCount = highestRef.data()[highestAbility];
+      await db
+        .collection("vark")
+        .doc("count")
+        .update({ [highestAbility]: prevCount + 1 });
+      navigation.replace("MainTab");
     }
   };
 
