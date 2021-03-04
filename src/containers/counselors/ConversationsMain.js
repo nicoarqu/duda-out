@@ -24,7 +24,7 @@ export const ConversationsMain = ({ navigation }) => {
               const { id } = chat;
               const data = chat.data();
               const user = await getItemData("users", data.studentId);
-              return { ...data, id, otherName: user.firstName };
+              return { ...data, id, otherName: fullName(user) };
             })
           );
           setConversations(res);

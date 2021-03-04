@@ -6,6 +6,7 @@ import { VARKBox } from "../../components/profile/VARKBox";
 import { fireAuth } from "../../config/Firebase";
 import { logOut } from "../../redux/actions/authActions";
 import { main } from "../../styles";
+import { fullName } from "../../utils/fullName";
 
 export const Profile = ({ navigation }) => {
   const uid = useSelector((state) => state.auth.currentUserId);
@@ -36,7 +37,7 @@ export const Profile = ({ navigation }) => {
   return (
     <View style={main.container}>
       <View style={main.subcontainer}>
-        <Text>Hola {user.firstName} !</Text>
+        <Text>Hola {fullName(user)} !</Text>
         <VARKBox user={user} state={state} />
         <View style={main.buttonView}>
           <TouchableOpacity onPress={handleLogout} style={main.button}>

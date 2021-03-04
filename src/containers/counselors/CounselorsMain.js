@@ -6,6 +6,7 @@ import { db } from "../../config/Firebase";
 import { getItemData } from "../../api/forms/getItemData";
 import { main } from "../../styles";
 import { ChatList } from "../../components/counselors/ChatList";
+import { fullName } from "../../utils/fullName";
 
 export const CounselorsMain = ({ navigation }) => {
   const [conversations, setConversations] = useState([]);
@@ -24,7 +25,7 @@ export const CounselorsMain = ({ navigation }) => {
               const { id } = chat;
               const data = chat.data();
               const user = await getItemData("users", data.counselorId);
-              return { ...data, id, otherName: user.firstName };
+              return { ...data, id, otherName: fullName(user) };
             })
           );
           setConversations(res);
