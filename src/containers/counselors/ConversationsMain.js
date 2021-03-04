@@ -6,6 +6,7 @@ import { db } from "../../config/Firebase";
 import { getItemData } from "../../api/forms/getItemData";
 import { main } from "../../styles";
 import { ChatList } from "../../components/counselors/ChatList";
+import { fullName } from "../../utils/fullName";
 
 export const ConversationsMain = ({ navigation }) => {
   const [conversations, setConversations] = useState([]);

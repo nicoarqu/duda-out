@@ -33,7 +33,7 @@ export const programStyles = StyleSheet.create({
   },
   infoText: {
     fontFamily: "RobotoRegular",
-    fontSize: 16,
+    fontSize: 17,
     paddingVertical: 8,
     paddingHorizontal: 16,
     textAlign: "justify",

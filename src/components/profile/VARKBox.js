@@ -28,7 +28,7 @@ export const VARKBox = ({ user, state }) => {
   return (
     <ScrollView style={[main.floatingBox, surveyStyle.abilityView]}>
       <View style={surveyStyle.abilityContent}>
-        <Text>Tus resultados son:</Text>
+        <Text>Tus resultados del test de habilidades son:</Text>
         {Object.keys(user.VARK)
           .sort((a, b) => user.VARK[b] - user.VARK[a])
           .map((ability, index) => (

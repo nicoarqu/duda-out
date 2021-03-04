@@ -89,7 +89,7 @@ export const PersonalInfo = ({ navigation }) => {
     <KeyboardAwareScrollView
       contentContainerStyle={main.flexGrowOne}
       enableOnAndroid
-      keyboardShouldPersistTaps="always"
+      keyboardShouldPersistTaps="never"
     >
       <PersonalInfoBanner modalVisible={modalVisible} setModalVisible={setModalVisible} />
       <View style={[main.container, main.floatingBox]}>

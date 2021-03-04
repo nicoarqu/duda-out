@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, Image } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { useDispatch } from "react-redux";
 import { WarningText } from "../../components/forms/WarningText";
 import { db, fireAuth } from "../../config/Firebase";
 import { logIn } from "../../redux/actions/authActions";
+import { fullName } from "../../utils/fullName";
 import { main, authStyle } from "../../styles";
 
 const logo = require("../../assets/img/dudaout-logo.jpeg");
@@ -23,17 +24,15 @@ export const LogIn = ({ navigation }) => {
   const checkMail = () => {
     let valid = true;
     if (!(state.email.trim() && state.email.includes("@"))) {
-      setIsMail(false);
       valid = false;
-    } else setIsMail(true);
+    }
+    setIsMail(valid);
     return valid;
   };
   const checkPassword = () => {
     let valid = true;
-    if (!state.password.trim()) {
-      setIsPassword(false);
-      valid = false;
-    } else setIsPassword(true);
+    if (!state.password.trim()) valid = false;
+    setIsPassword(valid);
     return valid;
   };
 
@@ -57,7 +56,7 @@ export const LogIn = ({ navigation }) => {
             .then((document) => {
               if (document.exists) {
                 const user = document.data();
-                const username = `${user.firstName} ${user.lastName}`;
+                const username = fullName(user);
                 dispatch(logIn(username, user.role, user.uid));
                 if (user.hasInfo && user.hasVARKTest) navigation.replace("MainTab");
                 else if (!user.hasInfo) navigation.replace("PersonalInfo");

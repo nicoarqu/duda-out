@@ -39,7 +39,6 @@ export const ProgramStats = () => {
                 </Text>
               </ListItem.Subtitle>
             </ListItem.Content>
-            <Entypo name="chevron-right" color="gray" size={24} />
           </ListItem>
         )}
         ListEmptyComponent={<Text>Cargando programas</Text>}

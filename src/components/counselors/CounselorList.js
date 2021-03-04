@@ -13,7 +13,7 @@ export const CounselorList = ({ counselors, openChat }) => {
       <FlatList
         data={counselors}
         style={counselorStyle.chatList}
-        keyExtractor={(item) => item.counselorId}
+        keyExtractor={(item) => item.uid}
         renderItem={({ item }) => (
           <View>
             <ListItem bottomDivider topDivider onPress={() => openChat(item.uid)}>
@@ -22,7 +22,7 @@ export const CounselorList = ({ counselors, openChat }) => {
                 <ListItem.Title>
                   <Text>{fullName(item)}</Text>
                 </ListItem.Title>
-                <ListItem.Subtitle>{item.desc}</ListItem.Subtitle>
+                <ListItem.Subtitle>{item.counselorDesc}</ListItem.Subtitle>
               </ListItem.Content>
               <Entypo name="chevron-right" color="gray" size={24} />
             </ListItem>

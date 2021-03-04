@@ -60,7 +60,11 @@ export const ProgramInfo = ({ route }) => {
         />
         <View style={programStyles.descView}>
           {program.description &&
-            program.description.map((des) => <Text style={programStyles.infoText}>{des}</Text>)}
+            program.description.map((des, idx) => (
+              <Text style={programStyles.infoText} key={idx}>
+                {des}
+              </Text>
+            ))}
         </View>
       </View>
     </ScrollView>

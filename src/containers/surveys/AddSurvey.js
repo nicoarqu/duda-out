@@ -120,7 +120,7 @@ export const AddSurvey = ({ navigation }) => {
           </TouchableOpacity>
         </View>
         <View style={main.buttonView}>
-          <TouchableOpacity onPress={() => console.log(questions)} style={main.button}>
+          <TouchableOpacity onPress={() => saveSurvey()} style={main.button}>
             <Text style={main.buttonText}>Enviar</Text>
           </TouchableOpacity>
         </View>
