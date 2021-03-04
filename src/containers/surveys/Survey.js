@@ -74,7 +74,7 @@ export const Survey = ({ route, navigation }) => {
             type={quest.type}
             ratingCount={quest.maxScore}
             startingValue={answer[quest.idx] ? answer[quest.idx].score : 0}
-            imageSize={50}
+            imageSize={40}
             showRating
             onFinishRating={(rating) => updateSurvey({ rating, params: { idx: quest.idx } })}
             setAnswer={setAnswer}

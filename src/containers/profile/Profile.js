@@ -11,7 +11,7 @@ import { fullName } from "../../utils/fullName";
 export const Profile = ({ navigation }) => {
   const uid = useSelector((state) => state.auth.currentUserId);
   const dispatch = useDispatch();
-  const [user, setUser] = useState({ username: "", VARK: {} });
+  const [user, setUser] = useState({ firstName: "", lastName: "", VARK: {} });
   const [state, setState] = useState({ loading: true, varkDesc: {} });
 
   useEffect(() => {
