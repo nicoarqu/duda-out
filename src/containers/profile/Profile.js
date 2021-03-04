@@ -5,7 +5,7 @@ import { getItemData } from "../../api/forms/getItemData";
 import { VARKBox } from "../../components/profile/VARKBox";
 import { fireAuth } from "../../config/Firebase";
 import { logOut } from "../../redux/actions/authActions";
-import { main } from "../../styles";
+import { authStyle, main } from "../../styles";
 import { fullName } from "../../utils/fullName";
 
 export const Profile = ({ navigation }) => {
@@ -17,8 +17,8 @@ export const Profile = ({ navigation }) => {
   useEffect(() => {
     const fetchData = async () => {
       const userData = await getItemData("users", uid);
-      const { firstName, VARKresults } = userData;
-      setUser({ firstName, VARK: VARKresults });
+      const { firstName, lastName, VARKresults } = userData;
+      setUser({ firstName, lastName, VARK: VARKresults });
       const varkDesc = await getItemData("vark-descriptions", "results");
       setState({ loading: false, varkDesc });
     };
@@ -37,10 +37,10 @@ export const Profile = ({ navigation }) => {
   return (
     <View style={main.container}>
       <View style={main.subcontainer}>
-        <Text>Hola {fullName(user)} !</Text>
+        <Text style={authStyle.profileName}>Hola {fullName(user)} !</Text>
         <VARKBox user={user} state={state} />
         <View style={main.buttonView}>
-          <TouchableOpacity onPress={handleLogout} style={main.button}>
+          <TouchableOpacity onPress={handleLogout} style={authStyle.buttonLogout}>
             <Text style={main.buttonText}>Cerrar sesión</Text>
           </TouchableOpacity>
         </View>

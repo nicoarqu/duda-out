@@ -75,6 +75,11 @@ export const main = StyleSheet.create({
     borderWidth: 2,
     marginVertical: 8,
   },
+  textInfo: {
+    fontFamily: "RobotoLight",
+    fontSize: 17,
+    textAlign: "center",
+  },
   textInput: {
     borderColor: colors.gray,
     borderWidth: 2,

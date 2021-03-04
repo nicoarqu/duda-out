@@ -24,7 +24,7 @@ export const ChatList = ({ conversations, navigation }) => {
             <Entypo name="chevron-right" color="gray" size={24} />
           </ListItem>
         )}
-        ListEmptyComponent={<Text>No tienes conversaciones</Text>}
+        ListEmptyComponent={<Text style={main.textInfo}>No tienes conversaciones</Text>}
       />
     </ScrollView>
   );
