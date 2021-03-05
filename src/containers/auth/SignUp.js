@@ -7,7 +7,7 @@ import { fireAuth, db } from "../../config/Firebase";
 import { logIn } from "../../redux/actions/authActions";
 import { main, authStyle } from "../../styles";
 
-const logo = require("../../assets/img/dudaout-logo.jpeg");
+const logo = require("../../assets/icon.png");
 
 export const SignUp = ({ navigation }) => {
   const [state, setState] = useState({

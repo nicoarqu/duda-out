@@ -8,7 +8,7 @@ import { logIn } from "../../redux/actions/authActions";
 import { fullName } from "../../utils/fullName";
 import { main, authStyle } from "../../styles";
 
-const logo = require("../../assets/img/dudaout-logo.jpeg");
+const logo = require("../../assets/icon.png");
 
 export const LogIn = ({ navigation }) => {
   const [state, setState] = useState({
