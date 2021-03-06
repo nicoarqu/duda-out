@@ -4,7 +4,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import { RadioButton } from "react-native-paper";
 import { useSelector } from "react-redux";
 import { VARKQuestions } from "../../api/forms/constants";
-import { WarningText } from "../../components/forms/WarningText";
+import { WarningText } from "../../components/shared/WarningText";
 import { db } from "../../config/Firebase";
 import { main, authStyle } from "../../styles";
 

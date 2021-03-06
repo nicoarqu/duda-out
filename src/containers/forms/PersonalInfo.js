@@ -3,8 +3,8 @@ import { View, TextInput, Text, TouchableOpacity } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { RadioButton } from "react-native-paper";
 import { useSelector } from "react-redux";
-import { PersonalInfoBanner } from "../../components/forms/PersonalInfoBanner";
-import { WarningText } from "../../components/forms/WarningText";
+import { PersonalInfoBanner } from "../../components/shared/PersonalInfoBanner";
+import { WarningText } from "../../components/shared/WarningText";
 import { db } from "../../config/Firebase";
 import { main, authStyle } from "../../styles";
 
@@ -207,7 +207,7 @@ export const PersonalInfo = ({ navigation }) => {
           </View>
           <View style={authStyle.formControl}>
             <Text style={authStyle.textLabel}>
-              ¿Con cuántos días de anticipación te gustaría preparar tus evaluaciones?
+              ¿Con cuántos días de anticipación te gusta preparar tus evaluaciones?
             </Text>
             <RadioButton.Group
               onValueChange={(newValue) => {

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { View, Text, Image, TextInput, TouchableOpacity } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { useDispatch } from "react-redux";
-import { WarningText } from "../../components/forms/WarningText";
+import { WarningText } from "../../components/shared/WarningText";
 import { fireAuth, db } from "../../config/Firebase";
 import { logIn } from "../../redux/actions/authActions";
 import { main, authStyle } from "../../styles";

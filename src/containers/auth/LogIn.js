@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, Image } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { useDispatch } from "react-redux";
-import { WarningText } from "../../components/forms/WarningText";
+import { ActivityIndicator } from "react-native-paper";
+import { WarningText } from "../../components/shared/WarningText";
 import { db, fireAuth } from "../../config/Firebase";
 import { logIn } from "../../redux/actions/authActions";
 import { fullName } from "../../utils/fullName";
@@ -43,6 +44,7 @@ export const LogIn = ({ navigation }) => {
   };
 
   const checkLogin = () => {
+    setState((prev) => ({ ...prev, isLoading: true }));
     if (isFormValid()) {
       const { email, password } = state;
       fireAuth
@@ -58,6 +60,7 @@ export const LogIn = ({ navigation }) => {
                 const user = document.data();
                 const username = fullName(user);
                 dispatch(logIn(username, user.role, user.uid));
+                setState((prev) => ({ ...prev, isLoading: true }));
                 if (user.hasInfo && user.hasVARKTest) navigation.replace("MainTab");
                 else if (!user.hasInfo) navigation.replace("PersonalInfo");
                 else navigation.replace("VARKTest");
@@ -108,7 +111,11 @@ export const LogIn = ({ navigation }) => {
           </View>
           <View style={authStyle.buttonView}>
             <TouchableOpacity onPress={() => checkLogin()} style={authStyle.button}>
-              <Text style={authStyle.buttonText}>Ingresar</Text>
+              {state.isLoading ? (
+                <ActivityIndicator />
+              ) : (
+                <Text style={authStyle.buttonText}>Ingresar</Text>
+              )}
             </TouchableOpacity>
           </View>
         </View>
