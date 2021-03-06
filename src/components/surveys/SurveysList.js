@@ -29,7 +29,7 @@ export const SurveysList = ({ surveys, navigation }) => {
             <Entypo name="chevron-right" color="gray" size={24} />
           </ListItem>
         )}
-        ListEmptyComponent={<Text style={main.textInfo}>No hay encuestas</Text>}
+        ListEmptyComponent={<Text style={main.textInfo}>No tienes encuestas pendientes :)</Text>}
       />
     </ScrollView>
   );

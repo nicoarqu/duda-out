@@ -17,7 +17,7 @@ export const VARKBox = ({ user, state }) => {
     readWrite: "Perfil Lectura y escritura",
     visual: "Perfil Visual",
   };
-  if (state.loading) {
+  if (state.isLoading) {
     return (
       <View style={main.floatingBox}>
         <ActivityIndicator />

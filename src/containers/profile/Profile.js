@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { getItemData } from "../../api/forms/getItemData";
 import { VARKBox } from "../../components/profile/VARKBox";
+import { Loading } from "../../components/shared/Loading";
 import { fireAuth } from "../../config/Firebase";
 import { logOut } from "../../redux/actions/authActions";
 import { authStyle, main } from "../../styles";
@@ -12,7 +13,7 @@ export const Profile = ({ navigation }) => {
   const uid = useSelector((state) => state.auth.currentUserId);
   const dispatch = useDispatch();
   const [user, setUser] = useState({ firstName: "", lastName: "", VARK: {} });
-  const [state, setState] = useState({ loading: true, varkDesc: {} });
+  const [state, setState] = useState({ isLoading: true, varkDesc: {} });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -20,7 +21,7 @@ export const Profile = ({ navigation }) => {
       const { firstName, lastName, VARKresults } = userData;
       setUser({ firstName, lastName, VARK: VARKresults });
       const varkDesc = await getItemData("vark-descriptions", "results");
-      setState({ loading: false, varkDesc });
+      setState({ isLoading: false, varkDesc });
     };
     fetchData();
   }, []);
@@ -34,6 +35,9 @@ export const Profile = ({ navigation }) => {
       })
       .catch((error) => alert(error));
   };
+  if (state.isLoading) {
+    return <Loading />;
+  }
   return (
     <View style={main.container}>
       <View style={main.subcontainer}>

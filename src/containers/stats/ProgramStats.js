@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import { Text } from "react-native";
 import { ListItem } from "react-native-elements";
 import { FlatList, ScrollView } from "react-native-gesture-handler";
-import { Entypo, Ionicons } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 import { db } from "../../config/Firebase";
 import { counselorStyle, main, colors } from "../../styles";
+import { Loading } from "../../components/shared/Loading";
 
 export const ProgramStats = () => {
   const [programs, setPrograms] = useState([]);
+  const [state, setState] = useState({ isLoading: true });
   useEffect(() => {
     db.collection("programs")
       .orderBy("rating", "desc")
@@ -20,6 +22,11 @@ export const ProgramStats = () => {
       })
       .catch((error) => alert(error));
   }, []);
+
+  if (state.isLoading) {
+    return <Loading />;
+  }
+
   return (
     <ScrollView style={main.flexOne}>
       <FlatList

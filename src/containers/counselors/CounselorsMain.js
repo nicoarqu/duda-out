@@ -7,14 +7,17 @@ import { getItemData } from "../../api/forms/getItemData";
 import { counselorStyle, main } from "../../styles";
 import { ChatList } from "../../components/counselors/ChatList";
 import { fullName } from "../../utils/fullName";
+import { Loading } from "../../components/shared/Loading";
 
 export const CounselorsMain = ({ navigation }) => {
   const [conversations, setConversations] = useState([]);
   const uid = useSelector((state) => state.auth.currentUserId);
+  const [state, setState] = useState({ isLoading: true });
 
   useFocusEffect(
     useCallback(() => {
       async function fetchConversations() {
+        setState((prev) => ({ ...prev, isLoading: true }));
         const querySnapshot = await db
           .collection("conversations")
           .where("studentId", "==", uid)
@@ -32,12 +35,17 @@ export const CounselorsMain = ({ navigation }) => {
         }
       }
       fetchConversations();
+      setState((prev) => ({ ...prev, isLoading: false }));
     }, [])
   );
 
   return (
     <View style={main.container}>
-      <ChatList conversations={conversations} navigation={navigation} />
+      {state.isLoading ? (
+        <Loading />
+      ) : (
+        <ChatList conversations={conversations} navigation={navigation} />
+      )}
       <View style={counselorStyle.buttonView}>
         <TouchableOpacity
           onPress={() => navigation.navigate("CounselorsInfo")}

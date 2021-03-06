@@ -6,9 +6,11 @@ import { getSurveys } from "../../api/surveys/getSurveys";
 import { SurveysList } from "../../components/surveys/SurveysList";
 import { db } from "../../config/Firebase";
 import { main, surveyStyle } from "../../styles";
+import { Loading } from "../../components/shared/Loading";
 
 export const PendingSurveys = ({ navigation }) => {
   const [surveys, setSurveys] = useState([]);
+  const [state, setState] = useState({ isLoading: true });
 
   const uid = useSelector((state) => state.auth.currentUserId);
 
@@ -27,8 +29,13 @@ export const PendingSurveys = ({ navigation }) => {
         } else setSurveys(allSurveys);
       }
       fetchData();
+      setState((prev) => ({ ...prev, isLoading: false }));
     }, [])
   );
+
+  if (state.isLoading) {
+    return <Loading />;
+  }
 
   return (
     <View style={main.container}>

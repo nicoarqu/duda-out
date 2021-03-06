@@ -7,10 +7,12 @@ import { getItemData } from "../../api/forms/getItemData";
 import { main } from "../../styles";
 import { ChatList } from "../../components/counselors/ChatList";
 import { fullName } from "../../utils/fullName";
+import { Loading } from "../../components/shared/Loading";
 
 export const ConversationsMain = ({ navigation }) => {
   const [conversations, setConversations] = useState([]);
   const uid = useSelector((state) => state.auth.currentUserId);
+  const [state, setState] = useState({ isLoading: true });
 
   useFocusEffect(
     useCallback(() => {
@@ -32,8 +34,13 @@ export const ConversationsMain = ({ navigation }) => {
         }
       }
       fetchConversations();
+      setState((prev) => ({ ...prev, isLoading: false }));
     }, [])
   );
+
+  if (state.isLoading) {
+    return <Loading />;
+  }
 
   return (
     <View style={main.container}>

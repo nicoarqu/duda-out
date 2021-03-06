@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
-import { ActivityIndicator } from "react-native-paper";
 import { getItemData } from "../../api/forms/getItemData";
 import { programs } from "../../api/programs/constants";
+import { Loading } from "../../components/shared/Loading";
 import { main, programStyles } from "../../styles";
 
 export const ProgramsList = ({ navigation }) => {
@@ -17,12 +17,7 @@ export const ProgramsList = ({ navigation }) => {
   }, []);
 
   if (info.loading) {
-    return (
-      <View style={main.subcontainer}>
-        <ActivityIndicator />
-        <Text>Cargando...</Text>
-      </View>
-    );
+    return <Loading />;
   }
 
   return (

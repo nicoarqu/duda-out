@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { View, Text } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
-import { ActivityIndicator } from "react-native-paper";
 import { useSelector } from "react-redux";
 import { getCounselors } from "../../api/counselors/getCounselors";
 import { getItemData } from "../../api/forms/getItemData";
 import { CounselorList } from "../../components/counselors/CounselorList";
+import { Loading } from "../../components/shared/Loading";
 import { db } from "../../config/Firebase";
 import { main, counselorStyle } from "../../styles";
 import { fullName } from "../../utils/fullName";
@@ -44,12 +44,7 @@ export const CounselorsInfo = ({ navigation }) => {
     }
   };
   if (info.loading) {
-    return (
-      <View style={main.subcontainer}>
-        <ActivityIndicator />
-        <Text>Cargando...</Text>
-      </View>
-    );
+    return <Loading />;
   }
 
   return (

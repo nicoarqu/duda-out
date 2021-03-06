@@ -60,13 +60,13 @@ export const LogIn = ({ navigation }) => {
                 const user = document.data();
                 const username = fullName(user);
                 dispatch(logIn(username, user.role, user.uid));
-                setState((prev) => ({ ...prev, isLoading: true }));
                 if (user.hasInfo && user.hasVARKTest) navigation.replace("MainTab");
                 else if (!user.hasInfo) navigation.replace("PersonalInfo");
                 else navigation.replace("VARKTest");
               } else {
-                alert("Usuario ya no existe");
+                alert("Este usuario ya no existe");
               }
+              setState((prev) => ({ ...prev, isLoading: true }));
             })
             .catch((error) => alert(error));
         })
