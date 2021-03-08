@@ -86,6 +86,7 @@ export const main = StyleSheet.create({
     borderRadius: 4,
     marginVertical: 4,
     fontFamily: "RobotoLight",
+    padding: 3,
   },
   textJustify: {
     textAlign: "justify",

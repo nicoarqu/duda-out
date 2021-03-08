@@ -15,6 +15,7 @@ export const PersonalInfo = ({ navigation }) => {
   const [livingWith, setLivingWith] = useState("");
   const [isWorking, setIsWorking] = useState("");
   const [grant, setGrant] = useState("");
+  const [grantOther, setGrantOther] = useState("-");
   const [anticipationDays, setAnticipationDays] = useState("");
   const [studyTime, setStudyTime] = useState("");
   const [studyOption, setStudyOption] = useState("");
@@ -43,7 +44,7 @@ export const PersonalInfo = ({ navigation }) => {
     else setLivingWithError(false);
     if (!isWorking.trim()) setIsWorkingError(true);
     else setIsWorkingError(false);
-    if (!grant.trim()) setGrantError(true);
+    if (!grant.trim() || !grantOther.trim()) setGrantError(true);
     else setGrantError(false);
     if (!anticipationDays.trim()) setAnticipationDaysError(true);
     else setAnticipationDaysError(false);
@@ -58,30 +59,32 @@ export const PersonalInfo = ({ navigation }) => {
       livingWith.trim() &&
       isWorking.trim() &&
       grant.trim() &&
+      grantOther.trim() &&
       anticipationDays.trim() &&
       studyTime.trim() &&
       studyOption.trim()
     );
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (checkForm()) {
-      db.collection("users")
-        .doc(uid)
-        .update({
-          university,
-          universityChoice,
-          career,
-          livingWith,
-          isWorking,
-          grant,
-          anticipationDays,
-          studyTime,
-          studyOption,
-          hasInfo: true,
-        })
-        .then(navigation.replace("VARKTest"))
-        .catch((error) => alert(error));
+      let grantVal = grant;
+      if (grant === "Otra") {
+        grantVal = grantOther;
+      }
+      await db.collection("users").doc(uid).update({
+        university,
+        universityChoice,
+        career,
+        livingWith,
+        isWorking,
+        grant: grantVal,
+        anticipationDays,
+        studyTime,
+        studyOption,
+        hasInfo: true,
+      });
+      navigation.replace("VARKTest");
     }
   };
 
@@ -200,7 +203,18 @@ export const PersonalInfo = ({ navigation }) => {
               </View>
               <View style={authStyle.radioButtonView}>
                 <RadioButton value="Otra" />
-                <Text style={authStyle.textOption}>Otra</Text>
+                {grant !== "Otra" ? (
+                  <Text style={authStyle.textOption}>Otra</Text>
+                ) : (
+                  <TextInput
+                    style={authStyle.textInputPersonal}
+                    placeholder="Otra ayuda"
+                    onChangeText={(newValue) => {
+                      setGrantOther(newValue);
+                      setGrantError(false);
+                    }}
+                  />
+                )}
               </View>
             </RadioButton.Group>
             {grantError && <WarningText message="Selecciona una opción" />}

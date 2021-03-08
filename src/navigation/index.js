@@ -9,7 +9,8 @@ import { fireAuth } from "../config/Firebase";
 const Stack = createStackNavigator();
 
 const MainStack = () => {
-  const initial = fireAuth.currentUser ? "MainTab" : "LogIn";
+  let initial = fireAuth.currentUser ? "MainTab" : "LogIn";
+  initial = "PersonalInfo";
   return (
     <Stack.Navigator initialRouteName={initial}>
       <Stack.Screen name="SignUp" component={SignUp} options={headerStyle.hideHeader} />

@@ -83,6 +83,16 @@ export const authStyle = StyleSheet.create({
     marginLeft: 6,
     fontFamily: "RobotoLight",
   },
+  textInputPersonal: {
+    borderColor: colors.gray,
+    borderRadius: 4,
+    borderWidth: 2,
+    fontFamily: "RobotoLight",
+    includeFontPadding: true,
+    marginVertical: 10,
+    padding: 3,
+    width: 160,
+  },
   textOption: {
     fontFamily: "RobotoRegular",
     fontSize: 14,
