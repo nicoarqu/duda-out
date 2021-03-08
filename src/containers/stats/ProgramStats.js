@@ -19,6 +19,7 @@ export const ProgramStats = () => {
           return { ...res.data(), id: res.id };
         });
         setPrograms(data);
+        setState((prev) => ({ ...prev, isLoading: false }));
       })
       .catch((error) => alert(error));
   }, []);
@@ -43,6 +44,7 @@ export const ProgramStats = () => {
                 <Text>
                   {"  "}
                   {item.rating.toFixed(1)}
+                  con {item.numRatings} votos
                 </Text>
               </ListItem.Subtitle>
             </ListItem.Content>
