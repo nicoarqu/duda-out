@@ -44,6 +44,7 @@ export const ProgramStats = () => {
                 <Text>
                   {"  "}
                   {item.rating.toFixed(1)}
+                  {"  "}
                   con {item.numRatings} votos
                 </Text>
               </ListItem.Subtitle>
