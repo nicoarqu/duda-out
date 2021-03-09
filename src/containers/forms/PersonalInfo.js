@@ -1,3 +1,4 @@
+import { Picker } from "@react-native-picker/picker";
 import React, { useState } from "react";
 import { View, TextInput, Text, TouchableOpacity } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
@@ -10,7 +11,7 @@ import { main, authStyle } from "../../styles";
 
 export const PersonalInfo = ({ navigation }) => {
   const [university, setUniversity] = useState("");
-  const [career, setCareer] = useState("");
+  const [career, setCareer] = useState("Ingeniería Comercial");
   const [universityChoice, setUniversityChoice] = useState("");
   const [livingWith, setLivingWith] = useState("");
   const [isWorking, setIsWorking] = useState("");
@@ -129,13 +130,16 @@ export const PersonalInfo = ({ navigation }) => {
           </View>
           <View style={authStyle.formControl}>
             <Text style={authStyle.textLabel}>¿Qué carrera estudias?</Text>
-            <TextInput
-              style={main.textInput}
-              placeholder="Tu carrera"
-              value={career}
-              onChangeText={(text) => setCareer(text)}
-              onBlur={() => (!career.trim() ? setCareerError(true) : setCareerError(false))}
-            />
+            <Picker
+              selectedValue={career}
+              onValueChange={(text) => {
+                setCareer(text);
+                setCareerError(false);
+              }}
+            >
+              <Picker.Item label="Ingeniería Comercial" value="Ingeniería Comercial" />
+              <Picker.Item label="Ingeniería Civil" value="Ingeniería Civil" />
+            </Picker>
             {careerError && <WarningText message="Ingresa tu carrera" />}
           </View>
           <View style={authStyle.formControl}>
@@ -200,6 +204,10 @@ export const PersonalInfo = ({ navigation }) => {
               <View style={authStyle.radioButtonView}>
                 <RadioButton value="Gratuidad" />
                 <Text style={authStyle.textOption}>Gratuidad</Text>
+              </View>
+              <View style={authStyle.radioButtonView}>
+                <RadioButton value="Ninguna" />
+                <Text style={authStyle.textOption}>Ninguna</Text>
               </View>
               <View style={authStyle.radioButtonView}>
                 <RadioButton value="Otra" />

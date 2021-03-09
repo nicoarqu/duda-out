@@ -1,8 +1,9 @@
 import React from "react";
-import { ScrollView, Text, FlatList } from "react-native";
+import { ScrollView, FlatList } from "react-native";
 import { ListItem } from "react-native-elements";
 import { Entypo, FontAwesome5 } from "@expo/vector-icons";
 import { colors, counselorStyle, main } from "../../styles";
+import { EmptyChats } from "./EmptyChats";
 
 export const ChatList = ({ conversations, navigation }) => {
   return (
@@ -24,7 +25,7 @@ export const ChatList = ({ conversations, navigation }) => {
             <Entypo name="chevron-right" color="gray" size={24} />
           </ListItem>
         )}
-        ListEmptyComponent={<Text style={main.textInfo}>No tienes conversaciones</Text>}
+        ListEmptyComponent={<EmptyChats />}
       />
     </ScrollView>
   );
