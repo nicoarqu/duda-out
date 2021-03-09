@@ -87,7 +87,7 @@ export const SignUp = ({ navigation }) => {
             .doc(uid)
             .set(data)
             .then(() => {
-              dispatch(logIn(0, 0, uid));
+              dispatch(logIn(`${firstName} ${lastName}`, 0, uid));
               setState((prev) => ({ ...prev, isLoading: false }));
               navigation.replace("PersonalInfo");
             })
