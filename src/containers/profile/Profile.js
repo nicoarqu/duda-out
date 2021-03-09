@@ -20,13 +20,11 @@ export const Profile = ({ navigation }) => {
   useEffect(() => {
     const fetchData = async () => {
       const userData = await getItemData("users", uid);
-      const { firstName, lastName, VARKresults, notificationToken } = userData;
+      const { firstName, lastName, VARKresults } = userData;
       setUser({ firstName, lastName, VARK: VARKresults });
       const varkDesc = await getItemData("vark-descriptions", "results");
       setState({ isLoading: false, varkDesc });
-      if (!notificationToken) {
-        await registerForPushNotifications();
-      }
+      await registerForPushNotifications();
     };
     fetchData();
   }, []);
