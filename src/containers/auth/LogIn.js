@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, Image } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { useDispatch } from "react-redux";
-import { WarningText } from "../../components/forms/WarningText";
+import { ActivityIndicator } from "react-native-paper";
+import { WarningText } from "../../components/shared/WarningText";
 import { db, fireAuth } from "../../config/Firebase";
 import { logIn } from "../../redux/actions/authActions";
+import { fullName } from "../../utils/fullName";
 import { main, authStyle } from "../../styles";
 
-const logo = require("../../assets/img/dudaout-logo.jpeg");
+const logo = require("../../assets/icon.png");
 
 export const LogIn = ({ navigation }) => {
   const [state, setState] = useState({
@@ -23,17 +25,15 @@ export const LogIn = ({ navigation }) => {
   const checkMail = () => {
     let valid = true;
     if (!(state.email.trim() && state.email.includes("@"))) {
-      setIsMail(false);
       valid = false;
-    } else setIsMail(true);
+    }
+    setIsMail(valid);
     return valid;
   };
   const checkPassword = () => {
     let valid = true;
-    if (!state.password.trim()) {
-      setIsPassword(false);
-      valid = false;
-    } else setIsPassword(true);
+    if (!state.password.trim()) valid = false;
+    setIsPassword(valid);
     return valid;
   };
 
@@ -44,6 +44,7 @@ export const LogIn = ({ navigation }) => {
   };
 
   const checkLogin = () => {
+    setState((prev) => ({ ...prev, isLoading: true }));
     if (isFormValid()) {
       const { email, password } = state;
       fireAuth
@@ -57,14 +58,15 @@ export const LogIn = ({ navigation }) => {
             .then((document) => {
               if (document.exists) {
                 const user = document.data();
-                const username = `${user.firstName} ${user.lastName}`;
+                const username = fullName(user);
                 dispatch(logIn(username, user.role, user.uid));
                 if (user.hasInfo && user.hasVARKTest) navigation.replace("MainTab");
                 else if (!user.hasInfo) navigation.replace("PersonalInfo");
                 else navigation.replace("VARKTest");
               } else {
-                alert("Usuario ya no existe");
+                alert("Este usuario ya no existe");
               }
+              setState((prev) => ({ ...prev, isLoading: true }));
             })
             .catch((error) => alert(error));
         })
@@ -109,7 +111,11 @@ export const LogIn = ({ navigation }) => {
           </View>
           <View style={authStyle.buttonView}>
             <TouchableOpacity onPress={() => checkLogin()} style={authStyle.button}>
-              <Text style={authStyle.buttonText}>Ingresar</Text>
+              {state.isLoading ? (
+                <ActivityIndicator />
+              ) : (
+                <Text style={authStyle.buttonText}>Ingresar</Text>
+              )}
             </TouchableOpacity>
           </View>
         </View>

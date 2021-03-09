@@ -3,6 +3,7 @@ import { View, Text, FlatList } from "react-native";
 import { ListItem } from "react-native-elements";
 import { Entypo, FontAwesome5 } from "@expo/vector-icons";
 import { colors, counselorStyle, main } from "../../styles";
+import { fullName } from "../../utils/fullName";
 
 export const CounselorList = ({ counselors, openChat }) => {
   return (
@@ -12,16 +13,16 @@ export const CounselorList = ({ counselors, openChat }) => {
       <FlatList
         data={counselors}
         style={counselorStyle.chatList}
-        keyExtractor={(item) => item.counselorId}
+        keyExtractor={(item) => item.uid}
         renderItem={({ item }) => (
           <View>
             <ListItem bottomDivider topDivider onPress={() => openChat(item.uid)}>
               <FontAwesome5 name="user-graduate" color={colors.blue} size={24} />
               <ListItem.Content>
                 <ListItem.Title>
-                  <Text>{item.firstName}</Text>
+                  <Text>{fullName(item)}</Text>
                 </ListItem.Title>
-                <ListItem.Subtitle>{item.desc}</ListItem.Subtitle>
+                <ListItem.Subtitle>{item.counselorDesc}</ListItem.Subtitle>
               </ListItem.Content>
               <Entypo name="chevron-right" color="gray" size={24} />
             </ListItem>

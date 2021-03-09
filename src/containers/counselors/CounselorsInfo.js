@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { View, Text } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
-import { ActivityIndicator } from "react-native-paper";
 import { useSelector } from "react-redux";
 import { getCounselors } from "../../api/counselors/getCounselors";
 import { getItemData } from "../../api/forms/getItemData";
 import { CounselorList } from "../../components/counselors/CounselorList";
+import { Loading } from "../../components/shared/Loading";
 import { db } from "../../config/Firebase";
 import { main, counselorStyle } from "../../styles";
+import { fullName } from "../../utils/fullName";
 
 export const CounselorsInfo = ({ navigation }) => {
   const [counselors, setCounselor] = useState([]);
@@ -32,22 +33,18 @@ export const CounselorsInfo = ({ navigation }) => {
       .where("counselorId", "==", counselorId)
       .limit(1)
       .get();
+    const counselor = await getItemData("users", counselorId);
     if (!querySnapshot.empty) {
       const chat = querySnapshot.docs[0];
-      navigation.navigate("Chat", { chatId: chat.id, title: chat.counselorName });
+      navigation.navigate("Chat", { chatId: chat.id, title: fullName(counselor) });
     } else {
       // create new chat
       const newChat = await db.collection("conversations").add({ counselorId, studentId: uid });
-      navigation.navigate("Chat", { chatId: newChat.id });
+      navigation.navigate("Chat", { chatId: newChat.id, title: fullName(counselor) });
     }
   };
   if (info.loading) {
-    return (
-      <View style={main.subcontainer}>
-        <ActivityIndicator />
-        <Text>Cargando...</Text>
-      </View>
-    );
+    return <Loading />;
   }
 
   return (

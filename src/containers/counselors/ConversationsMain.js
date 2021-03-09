@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { View } from "react-native";
 import { useSelector } from "react-redux";
 import { useFocusEffect } from "@react-navigation/native";
@@ -6,10 +6,13 @@ import { db } from "../../config/Firebase";
 import { getItemData } from "../../api/forms/getItemData";
 import { main } from "../../styles";
 import { ChatList } from "../../components/counselors/ChatList";
+import { fullName } from "../../utils/fullName";
+import { Loading } from "../../components/shared/Loading";
 
 export const ConversationsMain = ({ navigation }) => {
   const [conversations, setConversations] = useState([]);
   const uid = useSelector((state) => state.auth.currentUserId);
+  const [loading, setLoading] = useState(true);
 
   useFocusEffect(
     useCallback(() => {
@@ -24,7 +27,7 @@ export const ConversationsMain = ({ navigation }) => {
               const { id } = chat;
               const data = chat.data();
               const user = await getItemData("users", data.studentId);
-              return { ...data, id, otherName: user.firstName };
+              return { ...data, id, otherName: fullName(user) };
             })
           );
           setConversations(res);
@@ -34,9 +37,19 @@ export const ConversationsMain = ({ navigation }) => {
     }, [])
   );
 
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 700);
+  }, [conversations]);
+
   return (
     <View style={main.container}>
-      <ChatList conversations={conversations} navigation={navigation} />
+      {loading ? (
+        <Loading />
+      ) : (
+        <ChatList conversations={conversations} navigation={navigation} loading={loading} />
+      )}
     </View>
   );
 };

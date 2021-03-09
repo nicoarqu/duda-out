@@ -71,7 +71,7 @@ export const MainTab = () => {
   }
   return (
     <Tab.Navigator
-      initialRouteName="Profile"
+      initialRouteName="Perfil"
       shifting={false}
       activeColor={colors.blue}
       inactiveColor={colors.gray}

@@ -5,14 +5,15 @@ import { Picker } from "@react-native-picker/picker";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { main, surveyStyle } from "../../styles";
 import { db } from "../../config/Firebase";
+import { sendPushNotification } from "../../api/surveys/sendPushNotification";
 
 export const AddSurvey = ({ navigation }) => {
   const [questions, setQuestions] = useState([
     {
       idx: 0,
       title: "",
-      type: "",
-      maxScore: "",
+      type: "star",
+      maxScore: "3",
     },
   ]);
   const [state, setState] = useState({
@@ -20,9 +21,10 @@ export const AddSurvey = ({ navigation }) => {
   });
 
   const saveSurvey = async () => {
-    const newSurvey = await db.collection("surveys").add({
-      title: state.surveyTitle,
-    });
+    const title = state.surveyTitle;
+    const newSurvey = await db
+      .collection("surveys")
+      .add({ title, createdAt: new Date().getTime() });
     Promise.all(
       questions.map((q) => {
         return db
@@ -33,6 +35,23 @@ export const AddSurvey = ({ navigation }) => {
           .set({ ...q, voteCount: 0, avgVote: 0, maxScore: Number(q.maxScore) });
       })
     );
+    const snapshot = await db
+      .collection("users")
+      .where("role", "==", 0)
+      .orderBy("notificationToken")
+      .get();
+    if (!snapshot.empty) {
+      const users = snapshot.docs.map((usr) => usr.data());
+      Promise.all(
+        users.map((usr) => {
+          return sendPushNotification(
+            usr.notificationToken,
+            title,
+            "Tienes una nueva encuesta por responder!"
+          );
+        })
+      );
+    }
     navigation.pop();
   };
 
@@ -100,7 +119,6 @@ export const AddSurvey = ({ navigation }) => {
                   <Picker.Item label="6" value="6" />
                   <Picker.Item label="7" value="7" />
                   <Picker.Item label="8" value="8" />
-                  <Picker.Item label="9" value="9" />
                 </Picker>
               </View>
             </View>
@@ -120,7 +138,7 @@ export const AddSurvey = ({ navigation }) => {
           </TouchableOpacity>
         </View>
         <View style={main.buttonView}>
-          <TouchableOpacity onPress={() => console.log(questions)} style={main.button}>
+          <TouchableOpacity onPress={() => saveSurvey()} style={main.button}>
             <Text style={main.buttonText}>Enviar</Text>
           </TouchableOpacity>
         </View>

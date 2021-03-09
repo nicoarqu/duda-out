@@ -14,6 +14,12 @@ export const authStyle = StyleSheet.create({
     fontFamily: "RobotoMedium",
     fontSize: 16,
   },
+  buttonLogout: {
+    backgroundColor: colors.gray,
+    paddingVertical: 10,
+    paddingHorizontal: 30,
+    borderRadius: 4,
+  },
   buttonView: {
     marginTop: 8,
     width: "90%",
@@ -77,6 +83,16 @@ export const authStyle = StyleSheet.create({
     marginLeft: 6,
     fontFamily: "RobotoLight",
   },
+  textInputPersonal: {
+    borderColor: colors.gray,
+    borderRadius: 4,
+    borderWidth: 2,
+    fontFamily: "RobotoLight",
+    includeFontPadding: true,
+    marginVertical: 10,
+    padding: 3,
+    width: 160,
+  },
   textOption: {
     fontFamily: "RobotoRegular",
     fontSize: 14,
@@ -117,6 +133,13 @@ export const authStyle = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5,
+  },
+  profileName: {
+    textAlign: "center",
+    color: colors.black,
+    fontSize: 18,
+    marginVertical: 6,
+    fontFamily: "RobotoMedium",
   },
   radioButtonView: {
     flexDirection: "row",

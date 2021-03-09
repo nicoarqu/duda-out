@@ -1,15 +1,20 @@
 import { StyleSheet } from "react-native";
 
 export const colors = {
-  gray: "#808080",
-  blue: "#1673FF",
-  lightBlue: "#E7F0F8",
-  darkBlue: "#0f52b8",
-  white: "#FFFFFF",
   black: "#000000",
-  starYellow: "#f9b313",
+  blue: "#1673FF",
+  darkBlue: "#0f52b8",
+  darkGray: "#3f4d52",
+  gray: "#808080",
+  lightBlue: "#E7F0F8",
   modalBackground: "#ebf2f2",
+  pieBlue: "#0082a5",
+  pieDarkBlue: "#004c6d",
+  pieLightBlue: "#00c9df",
+  pieLighterBlue: "#00f9ff",
+  starYellow: "#f9b313",
   warnRed: "#B33A3A",
+  white: "#FFFFFF",
 };
 
 export const headerStyle = {
@@ -75,16 +80,23 @@ export const main = StyleSheet.create({
     borderWidth: 2,
     marginVertical: 8,
   },
+  textInfo: {
+    fontFamily: "RobotoLight",
+    fontSize: 17,
+    textAlign: "center",
+  },
   textInput: {
     borderColor: colors.gray,
     borderWidth: 2,
     borderRadius: 4,
     marginVertical: 4,
     fontFamily: "RobotoLight",
+    padding: 3,
   },
   textJustify: {
     textAlign: "justify",
   },
+  pieChart: { marginTop: "33%" },
   subcontainer: {
     flex: 1,
     alignItems: "center",

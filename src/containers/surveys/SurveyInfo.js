@@ -28,13 +28,12 @@ export const SurveyInfo = ({ route }) => {
 
   return (
     <ScrollView style={[main.container, main.floatingBox]}>
-      <Text style={surveyStyle.title}>{title}</Text>
       {questions.map((quest) => (
         <View key={quest.idx} style={surveyStyle.formQuestion}>
           <Text style={surveyStyle.textLabel}>{quest.title}</Text>
           <View style={surveyStyle.surveyInfoData}>
             <Text style={surveyStyle.textNumber}>
-              {quest.avgVote} / {quest.maxScore}
+              {quest.avgVote.toFixed(1)} / {quest.maxScore}
             </Text>
             <Text> con {quest.voteCount} votos</Text>
           </View>
@@ -42,7 +41,7 @@ export const SurveyInfo = ({ route }) => {
             type={quest.type}
             ratingCount={Number(quest.maxScore)}
             startingValue={quest.avgVote}
-            imageSize={50}
+            imageSize={40}
             readonly
           />
         </View>

@@ -1,20 +1,22 @@
+import { Picker } from "@react-native-picker/picker";
 import React, { useState } from "react";
 import { View, TextInput, Text, TouchableOpacity } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { RadioButton } from "react-native-paper";
 import { useSelector } from "react-redux";
-import { PersonalInfoBanner } from "../../components/forms/PersonalInfoBanner";
-import { WarningText } from "../../components/forms/WarningText";
+import { PersonalInfoBanner } from "../../components/shared/PersonalInfoBanner";
+import { WarningText } from "../../components/shared/WarningText";
 import { db } from "../../config/Firebase";
 import { main, authStyle } from "../../styles";
 
 export const PersonalInfo = ({ navigation }) => {
   const [university, setUniversity] = useState("");
-  const [career, setCareer] = useState("");
+  const [career, setCareer] = useState("Ingeniería Comercial");
   const [universityChoice, setUniversityChoice] = useState("");
   const [livingWith, setLivingWith] = useState("");
   const [isWorking, setIsWorking] = useState("");
   const [grant, setGrant] = useState("");
+  const [grantOther, setGrantOther] = useState("-");
   const [anticipationDays, setAnticipationDays] = useState("");
   const [studyTime, setStudyTime] = useState("");
   const [studyOption, setStudyOption] = useState("");
@@ -43,7 +45,7 @@ export const PersonalInfo = ({ navigation }) => {
     else setLivingWithError(false);
     if (!isWorking.trim()) setIsWorkingError(true);
     else setIsWorkingError(false);
-    if (!grant.trim()) setGrantError(true);
+    if (!grant.trim() || !grantOther.trim()) setGrantError(true);
     else setGrantError(false);
     if (!anticipationDays.trim()) setAnticipationDaysError(true);
     else setAnticipationDaysError(false);
@@ -58,30 +60,32 @@ export const PersonalInfo = ({ navigation }) => {
       livingWith.trim() &&
       isWorking.trim() &&
       grant.trim() &&
+      grantOther.trim() &&
       anticipationDays.trim() &&
       studyTime.trim() &&
       studyOption.trim()
     );
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (checkForm()) {
-      db.collection("users")
-        .doc(uid)
-        .update({
-          university,
-          universityChoice,
-          career,
-          livingWith,
-          isWorking,
-          grant,
-          anticipationDays,
-          studyTime,
-          studyOption,
-          hasInfo: true,
-        })
-        .then(navigation.replace("VARKTest"))
-        .catch((error) => alert(error));
+      let grantVal = grant;
+      if (grant === "Otra") {
+        grantVal = grantOther;
+      }
+      await db.collection("users").doc(uid).update({
+        university,
+        universityChoice,
+        career,
+        livingWith,
+        isWorking,
+        grant: grantVal,
+        anticipationDays,
+        studyTime,
+        studyOption,
+        hasInfo: true,
+      });
+      navigation.replace("VARKTest");
     }
   };
 
@@ -89,7 +93,7 @@ export const PersonalInfo = ({ navigation }) => {
     <KeyboardAwareScrollView
       contentContainerStyle={main.flexGrowOne}
       enableOnAndroid
-      keyboardShouldPersistTaps="always"
+      keyboardShouldPersistTaps="never"
     >
       <PersonalInfoBanner modalVisible={modalVisible} setModalVisible={setModalVisible} />
       <View style={[main.container, main.floatingBox]}>
@@ -126,13 +130,16 @@ export const PersonalInfo = ({ navigation }) => {
           </View>
           <View style={authStyle.formControl}>
             <Text style={authStyle.textLabel}>¿Qué carrera estudias?</Text>
-            <TextInput
-              style={main.textInput}
-              placeholder="Tu carrera"
-              value={career}
-              onChangeText={(text) => setCareer(text)}
-              onBlur={() => (!career.trim() ? setCareerError(true) : setCareerError(false))}
-            />
+            <Picker
+              selectedValue={career}
+              onValueChange={(text) => {
+                setCareer(text);
+                setCareerError(false);
+              }}
+            >
+              <Picker.Item label="Ingeniería Comercial" value="Ingeniería Comercial" />
+              <Picker.Item label="Ingeniería Civil" value="Ingeniería Civil" />
+            </Picker>
             {careerError && <WarningText message="Ingresa tu carrera" />}
           </View>
           <View style={authStyle.formControl}>
@@ -199,15 +206,30 @@ export const PersonalInfo = ({ navigation }) => {
                 <Text style={authStyle.textOption}>Gratuidad</Text>
               </View>
               <View style={authStyle.radioButtonView}>
+                <RadioButton value="Ninguna" />
+                <Text style={authStyle.textOption}>Ninguna</Text>
+              </View>
+              <View style={authStyle.radioButtonView}>
                 <RadioButton value="Otra" />
-                <Text style={authStyle.textOption}>Otra</Text>
+                {grant !== "Otra" ? (
+                  <Text style={authStyle.textOption}>Otra</Text>
+                ) : (
+                  <TextInput
+                    style={authStyle.textInputPersonal}
+                    placeholder="Otra ayuda"
+                    onChangeText={(newValue) => {
+                      setGrantOther(newValue);
+                      setGrantError(false);
+                    }}
+                  />
+                )}
               </View>
             </RadioButton.Group>
             {grantError && <WarningText message="Selecciona una opción" />}
           </View>
           <View style={authStyle.formControl}>
             <Text style={authStyle.textLabel}>
-              ¿Con cuántos días de anticipación te gustaría preparar tus evaluaciones?
+              ¿Con cuántos días de anticipación te gusta preparar tus evaluaciones?
             </Text>
             <RadioButton.Group
               onValueChange={(newValue) => {

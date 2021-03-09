@@ -3,13 +3,12 @@ import { colors } from "./appStyles";
 
 export const counselorStyle = StyleSheet.create({
   button: {
-    borderWidth: 2,
+    alignSelf: "center",
+    backgroundColor: colors.blue,
     borderRadius: 4,
-    borderColor: colors.blue,
     paddingVertical: 10,
-    paddingHorizontal: 20,
-    width: 240,
-    justifyContent: "center",
+    paddingHorizontal: 30,
+    width: "70%",
   },
   buttonsContainer: {
     flex: 1,
@@ -17,7 +16,7 @@ export const counselorStyle = StyleSheet.create({
     paddingVertical: 20,
   },
   buttonView: {
-    flex: 1,
+    flex: 0.5,
     paddingVertical: 12,
   },
   counselorInfoVIew: {

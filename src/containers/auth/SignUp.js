@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { View, Text, Image, TextInput, TouchableOpacity } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { ActivityIndicator } from "react-native-paper";
 import { useDispatch } from "react-redux";
-import { WarningText } from "../../components/forms/WarningText";
+import { WarningText } from "../../components/shared/WarningText";
 import { fireAuth, db } from "../../config/Firebase";
 import { logIn } from "../../redux/actions/authActions";
 import { main, authStyle } from "../../styles";
 
-const logo = require("../../assets/img/dudaout-logo.jpeg");
+const logo = require("../../assets/icon.png");
 
 export const SignUp = ({ navigation }) => {
   const [state, setState] = useState({
@@ -66,6 +67,7 @@ export const SignUp = ({ navigation }) => {
   };
 
   const handleSignUp = () => {
+    setState((prev) => ({ ...prev, isLoading: true }));
     if (isFormValid()) {
       const { email, password, firstName, lastName } = state;
       fireAuth
@@ -78,7 +80,6 @@ export const SignUp = ({ navigation }) => {
             firstName,
             lastName,
             hasInfo: false,
-            conversations: [],
             role: 0,
           };
           const usersRef = db.collection("users");
@@ -87,6 +88,7 @@ export const SignUp = ({ navigation }) => {
             .set(data)
             .then(() => {
               dispatch(logIn(0, 0, uid));
+              setState((prev) => ({ ...prev, isLoading: false }));
               navigation.replace("PersonalInfo");
             })
             .catch((error) => {
@@ -154,7 +156,11 @@ export const SignUp = ({ navigation }) => {
           </View>
           <View style={authStyle.buttonView}>
             <TouchableOpacity onPress={() => handleSignUp()} style={authStyle.button}>
-              <Text style={authStyle.buttonText}>Registrarme</Text>
+              {state.isLoading ? (
+                <ActivityIndicator />
+              ) : (
+                <Text style={authStyle.buttonText}>Registrarme</Text>
+              )}
             </TouchableOpacity>
           </View>
         </View>
