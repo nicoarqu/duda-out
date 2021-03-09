@@ -21,8 +21,7 @@ export const SurveyMain = ({ navigation }) => {
   );
   return (
     <View style={main.container}>
-      {loading && <Loading />}
-      {!loading && <SurveysList surveys={surveys} navigation={navigation} />}
+      {loading ? <Loading /> : <SurveysList surveys={surveys} navigation={navigation} />}
       <View style={surveyStyle.buttonView}>
         <TouchableOpacity onPress={() => navigation.push("AddSurvey")} style={main.button}>
           <Text style={main.buttonText}>Crear encuesta</Text>

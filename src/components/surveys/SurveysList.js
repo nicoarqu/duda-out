@@ -3,6 +3,7 @@ import { ScrollView, Text, FlatList } from "react-native";
 import { ListItem } from "react-native-elements";
 import { Entypo, AntDesign } from "@expo/vector-icons";
 import { useSelector } from "react-redux";
+import moment from "moment";
 import { colors, counselorStyle, main } from "../../styles";
 
 export const SurveysList = ({ surveys, navigation }) => {
@@ -25,6 +26,7 @@ export const SurveysList = ({ surveys, navigation }) => {
             <AntDesign name="form" size={24} color={colors.blue} />
             <ListItem.Content>
               <ListItem.Title>{item.title}</ListItem.Title>
+              <ListItem.Subtitle>{moment(item.createdAt).format("DD MMM YYYY")}</ListItem.Subtitle>
             </ListItem.Content>
             <Entypo name="chevron-right" color="gray" size={24} />
           </ListItem>

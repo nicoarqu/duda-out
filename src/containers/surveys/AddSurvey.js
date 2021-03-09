@@ -12,8 +12,8 @@ export const AddSurvey = ({ navigation }) => {
     {
       idx: 0,
       title: "",
-      type: "",
-      maxScore: "",
+      type: "star",
+      maxScore: "3",
     },
   ]);
   const [state, setState] = useState({
@@ -22,7 +22,9 @@ export const AddSurvey = ({ navigation }) => {
 
   const saveSurvey = async () => {
     const title = state.surveyTitle;
-    const newSurvey = await db.collection("surveys").add({ title });
+    const newSurvey = await db
+      .collection("surveys")
+      .add({ title, createdAt: new Date().getTime() });
     Promise.all(
       questions.map((q) => {
         return db

@@ -1,16 +1,16 @@
 import React, { useCallback, useState } from "react";
-import { View, Text } from "react-native";
+import { View } from "react-native";
 import { useSelector } from "react-redux";
 import { useFocusEffect } from "@react-navigation/native";
 import { getSurveys } from "../../api/surveys/getSurveys";
 import { SurveysList } from "../../components/surveys/SurveysList";
 import { db } from "../../config/Firebase";
-import { main, surveyStyle } from "../../styles";
+import { main } from "../../styles";
 import { Loading } from "../../components/shared/Loading";
 
 export const PendingSurveys = ({ navigation }) => {
   const [surveys, setSurveys] = useState([]);
-  const [state, setState] = useState({ isLoading: true });
+  const [loading, setLoading] = useState(true);
 
   const uid = useSelector((state) => state.auth.currentUserId);
 
@@ -29,17 +29,15 @@ export const PendingSurveys = ({ navigation }) => {
         } else setSurveys(allSurveys);
       }
       fetchData();
-      setState((prev) => ({ ...prev, isLoading: false }));
+      setTimeout(() => {
+        setLoading(false);
+      }, 700);
     }, [])
   );
 
-  if (state.isLoading) {
-    return <Loading />;
-  }
-
   return (
     <View style={main.container}>
-      <SurveysList surveys={surveys} navigation={navigation} />
+      {loading ? <Loading /> : <SurveysList surveys={surveys} navigation={navigation} />}
     </View>
   );
 };

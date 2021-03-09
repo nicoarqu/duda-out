@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { useSelector } from "react-redux";
 import { useFocusEffect } from "@react-navigation/native";
@@ -12,12 +12,11 @@ import { Loading } from "../../components/shared/Loading";
 export const CounselorsMain = ({ navigation }) => {
   const [conversations, setConversations] = useState([]);
   const uid = useSelector((state) => state.auth.currentUserId);
-  const [state, setState] = useState({ isLoading: true });
+  const [loading, setLoading] = useState(true);
 
   useFocusEffect(
     useCallback(() => {
       async function fetchConversations() {
-        setState((prev) => ({ ...prev, isLoading: true }));
         const querySnapshot = await db
           .collection("conversations")
           .where("studentId", "==", uid)
@@ -35,16 +34,21 @@ export const CounselorsMain = ({ navigation }) => {
         }
       }
       fetchConversations();
-      setState((prev) => ({ ...prev, isLoading: false }));
     }, [])
   );
 
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 700);
+  }, [conversations]);
+
   return (
     <View style={main.container}>
-      {state.isLoading ? (
+      {loading ? (
         <Loading />
       ) : (
-        <ChatList conversations={conversations} navigation={navigation} />
+        <ChatList conversations={conversations} navigation={navigation} loading={loading} />
       )}
       <View style={counselorStyle.buttonView}>
         <TouchableOpacity

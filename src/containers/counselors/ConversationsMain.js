@@ -10,9 +10,9 @@ import { fullName } from "../../utils/fullName";
 import { Loading } from "../../components/shared/Loading";
 
 export const ConversationsMain = ({ navigation }) => {
-  const [conversations, setConversations] = useState([]);
+  const [conversations, setConversations] = useState([{}]);
   const uid = useSelector((state) => state.auth.currentUserId);
-  const [state, setState] = useState({ isLoading: true });
+  const [loading, setLoading] = useState(true);
 
   useFocusEffect(
     useCallback(() => {
@@ -34,17 +34,17 @@ export const ConversationsMain = ({ navigation }) => {
         }
       }
       fetchConversations();
-      setState((prev) => ({ ...prev, isLoading: false }));
+      setLoading(false);
     }, [])
   );
 
-  if (state.isLoading) {
-    return <Loading />;
-  }
-
   return (
     <View style={main.container}>
-      <ChatList conversations={conversations} navigation={navigation} />
+      {loading ? (
+        <Loading />
+      ) : (
+        <ChatList conversations={conversations} navigation={navigation} loading={loading} />
+      )}
     </View>
   );
 };
