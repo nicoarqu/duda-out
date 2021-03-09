@@ -28,7 +28,6 @@ export const SurveyInfo = ({ route }) => {
 
   return (
     <ScrollView style={[main.container, main.floatingBox]}>
-      <Text style={surveyStyle.title}>{title}</Text>
       {questions.map((quest) => (
         <View key={quest.idx} style={surveyStyle.formQuestion}>
           <Text style={surveyStyle.textLabel}>{quest.title}</Text>

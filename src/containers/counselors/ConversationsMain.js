@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { View } from "react-native";
 import { useSelector } from "react-redux";
 import { useFocusEffect } from "@react-navigation/native";
@@ -10,7 +10,7 @@ import { fullName } from "../../utils/fullName";
 import { Loading } from "../../components/shared/Loading";
 
 export const ConversationsMain = ({ navigation }) => {
-  const [conversations, setConversations] = useState([{}]);
+  const [conversations, setConversations] = useState([]);
   const uid = useSelector((state) => state.auth.currentUserId);
   const [loading, setLoading] = useState(true);
 
@@ -34,9 +34,14 @@ export const ConversationsMain = ({ navigation }) => {
         }
       }
       fetchConversations();
-      setLoading(false);
     }, [])
   );
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 700);
+  }, [conversations]);
 
   return (
     <View style={main.container}>
