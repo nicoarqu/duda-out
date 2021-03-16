@@ -19,7 +19,13 @@ export const ChatList = ({ conversations, navigation, loading }) => {
           <ListItem
             bottomDivider
             topDivider
-            onPress={() => navigation.navigate("Chat", { chatId: item.id, title: item.otherName })}
+            onPress={() =>
+              navigation.navigate("Chat", {
+                chatId: item.id,
+                title: item.otherName,
+                token: item.otherToken,
+              })
+            }
           >
             <FontAwesome5 name="user-graduate" color={colors.blue} size={24} />
             <ListItem.Content>

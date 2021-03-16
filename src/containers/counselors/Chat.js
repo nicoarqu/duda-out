@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { GiftedChat, Composer, Send } from "react-native-gifted-chat";
 import { useSelector } from "react-redux";
+import { sendPushNotification } from "../../api/surveys/sendPushNotification";
 import { db } from "../../config/Firebase";
 
 export const Chat = ({ route }) => {
-  const { chatId } = route.params;
+  const { chatId, token, title } = route.params;
   const [messages, setMessages] = useState([]);
   const auth = useSelector((state) => state.auth);
   const user = { _id: auth.currentUserId, name: auth.currentUserName };
@@ -32,6 +33,7 @@ export const Chat = ({ route }) => {
       user,
       sent: true,
     });
+    sendPushNotification(token, title, text);
   };
 
   useEffect(() => {

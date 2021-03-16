@@ -27,7 +27,7 @@ export const CounselorsMain = ({ navigation }) => {
               const { id } = chat;
               const data = chat.data();
               const user = await getItemData("users", data.counselorId);
-              return { ...data, id, otherName: fullName(user) };
+              return { ...data, id, otherName: fullName(user), otherToken: user.notificationToken };
             })
           );
           setConversations(res);
