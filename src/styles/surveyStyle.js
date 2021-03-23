@@ -108,6 +108,13 @@ export const surveyStyle = StyleSheet.create({
     justifyContent: "center",
     marginVertical: 10,
   },
+  questionTitle: {
+    textAlign: "center",
+    color: colors.black,
+    fontSize: 18,
+    marginVertical: 10,
+    fontFamily: "BitterRegular",
+  },
   radioButtonView: {
     flexDirection: "row",
     alignItems: "center",
@@ -127,8 +134,8 @@ export const surveyStyle = StyleSheet.create({
   title: {
     textAlign: "center",
     color: colors.black,
-    fontSize: 22,
+    fontSize: 16,
     marginVertical: 10,
-    fontFamily: "BitterRegular",
+    fontFamily: "RobotoLight",
   },
 });

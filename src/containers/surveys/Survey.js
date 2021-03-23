@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { View, Text } from "react-native";
 import { Rating } from "react-native-ratings";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { db } from "../../config/Firebase";
 import { main, surveyStyle } from "../../styles";
 
 export const Survey = ({ route, navigation }) => {
-  const { surveyId, title } = route.params;
+  const { surveyId } = route.params;
   const [answer, setAnswer] = useState([]);
   const [questions, setQuestions] = useState([]);
   const uid = useSelector((state) => state.auth.currentUserId);
@@ -66,24 +66,26 @@ export const Survey = ({ route, navigation }) => {
 
   return (
     <View style={[main.container, main.floatingBox]}>
-      <Text style={surveyStyle.title}>{title}</Text>
-      {questions.map((quest) => (
-        <View key={quest.idx}>
-          <Text>{quest.title}</Text>
-          <Rating
-            type={quest.type}
-            ratingCount={quest.maxScore}
-            startingValue={answer[quest.idx] ? answer[quest.idx].score : 0}
-            imageSize={40}
-            showRating
-            onFinishRating={(rating) => updateSurvey({ rating, params: { idx: quest.idx } })}
-            setAnswer={setAnswer}
-            answer={answer}
-          />
-        </View>
-      ))}
-      <View style={main.buttonView}>
-        <TouchableOpacity onPress={() => sendSurvey()} style={main.button}>
+      <Text style={surveyStyle.title}>Desliza con el dedo para votar </Text>
+      <ScrollView>
+        {questions.map((quest) => (
+          <View key={quest.idx} style={{ marginVertical: "4%" }}>
+            <Text style={surveyStyle.questionTitle}>{quest.title}</Text>
+            <Rating
+              type={quest.type}
+              ratingCount={quest.maxScore}
+              startingValue={answer[quest.idx] ? answer[quest.idx].score : 0}
+              imageSize={40}
+              showRating
+              onFinishRating={(rating) => updateSurvey({ rating, params: { idx: quest.idx } })}
+              setAnswer={setAnswer}
+              answer={answer}
+            />
+          </View>
+        ))}
+      </ScrollView>
+      <View style={[main.buttonView, { marginVertical: "12%" }]}>
+        <TouchableOpacity onPress={() => sendSurvey()} style={[main.button, { minHeight: 32 }]}>
           <Text style={main.buttonText}>Enviar</Text>
         </TouchableOpacity>
       </View>
